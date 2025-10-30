@@ -26,18 +26,9 @@ env/
 .DS_Store
 Thumbs.db
 
-# Large data files (download from Google Drive)
-data/*.zip
-data/*.pt
-data/merged-kg_*.tsv
-
-# Model data files (should be downloaded)
-data/rgt/
-data/kogut/*.json
-data/kogut/*.tsv
-
-# Keep only the isolation source hierarchy
-!data/isolation_source_hierarchy.json
+# Data directory - all files should be generated or downloaded
+# DO NOT commit any files in data/ to the repository
+data/
 
 # uv lock file (can be regenerated)
 # Commenting out to keep it for reproducibility
