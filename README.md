@@ -70,21 +70,44 @@ MicroGrowLinkService/              # This repository
 
 ## Installation
 
-### Overview
+### Quick Setup (Automated)
 
-This installation process involves:
-1. Installing **Python dependencies** (PyTorch, Gradio, etc.)
-2. Downloading **3 files from Google Drive** (~615MB compressed):
-   - `kgm_data.zip` - Knowledge graph data (nodes and edges)
-   - `kogut_data.zip` - Model supporting data (vocabularies)
-   - `kogut_20251026_212314.pt` - Trained KOGUT model weights
-3. Generating the **isolation source hierarchy** file
+The easiest way to set up MicroGrowLinkService:
 
-**Total disk space required:** ~3GB (1.5GB for data, ~1.5GB for PyTorch and dependencies)
+```bash
+# 1. Clone the repository
+git clone https://github.com/realmarcin/MicroGrowLinkService.git
+cd MicroGrowLinkService
 
-**Estimated time:** 20-40 minutes (depending on download speeds and hardware)
+# 2. Run the automated setup script
+python setup.py
 
-### Step 1: Clone Repository and Install Dependencies
+# 3. Install dependencies
+uv sync
+
+# 4. Run the application
+uv run python app.py
+```
+
+The setup script will automatically:
+- ✓ Install gdown (if needed)
+- ✓ Download all 3 files from Google Drive (~615MB)
+- ✓ Extract files to correct locations
+- ✓ Verify installation
+- ✓ Generate isolation source hierarchy
+
+**Total time:** 20-40 minutes (mostly download time)
+
+### Manual Setup (Alternative)
+
+If you prefer manual control or the automated setup fails, follow these steps:
+
+**Requirements:**
+- Python 3.9+
+- ~3GB disk space (1.5GB data + 1.5GB dependencies)
+- Internet connection for downloads
+
+#### Step 1: Clone Repository and Install Dependencies
 
 ```bash
 # Clone this repository
@@ -104,7 +127,7 @@ uv run python -c "import torch, gradio, pandas, duckdb; print('✓ All dependenc
 
 **Note**: The first `uv sync` will download PyTorch (~1.5GB) and may take several minutes.
 
-### Step 2: Download Required Data Files from Google Drive
+#### Step 2: Download Required Data Files from Google Drive
 
 All required data files and the trained KOGUT model are available on Google Drive:
 
@@ -204,7 +227,7 @@ wc -l data/merged-kg_*.tsv
 # Expected: ~1.4M lines (edges), ~1.4M lines (nodes)
 ```
 
-### Step 3: Generate Isolation Source Hierarchy
+#### Step 3: Generate Isolation Source Hierarchy
 
 ```bash
 # Generate hierarchical organization of 352 isolation sources
@@ -226,7 +249,7 @@ uv run python scripts/build_isolation_source_hierarchy.py
 ls -lh data/isolation_source_hierarchy.json
 ```
 
-### Step 4: Configure Paths (Optional)
+#### Step 4: Configure Paths (Optional)
 
 The default configuration in `config.py` should work if you followed the steps above:
 
@@ -248,7 +271,7 @@ DEFAULT_HIDDEN_DIM = 64  # KOGUT model's hidden dimension
 
 Only edit `config.py` if you placed files in non-standard locations.
 
-### Step 5: Validate Configuration
+#### Step 5: Validate Configuration
 
 ```bash
 # Run validation script
@@ -696,7 +719,16 @@ MicroGrowLinkService/
 
 ## Quick Reference
 
+### Automated Setup
+
+```bash
+# One-command setup (recommended)
+python setup.py && uv sync && uv run python app.py
+```
+
 ### Required Downloads from Google Drive
+
+*Note: The setup.py script downloads these automatically*
 
 **Main Folder:** https://drive.google.com/drive/folders/1mWGgYnyQiyMFIdotss4NPYdhfoUSITRi
 
