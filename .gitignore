@@ -30,6 +30,10 @@ Thumbs.db
 # DO NOT commit any files in data/ to the repository
 data/
 
+# Models directory - model files are too large for git
+# Download from Google Drive instead
+/models/
+
 # uv lock file (can be regenerated)
 # Commenting out to keep it for reproducibility
 # uv.lock

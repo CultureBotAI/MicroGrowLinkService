@@ -11,7 +11,9 @@ MicroGrowLinkService provides an intuitive web interface where users can:
 - Explore hierarchically organized isolation sources (352 environmental contexts)
 - Download detailed results and validation feedback
 
-The service uses a **KOGUT (Relational Graph Transformer)** model trained on the KG-Microbe knowledge graph to make predictions based on learned patterns in microbial growth data.
+The service uses a **KOGUT (Knowledge Graph Universal Transformer)** model trained on the KG-Microbe knowledge graph to make predictions based on learned patterns in microbial growth data.
+
+**NEW**: Now fully standalone! No external dependencies on private repositories.
 
 ## Features
 
@@ -25,6 +27,7 @@ The service uses a **KOGUT (Relational Graph Transformer)** model trained on the
 - **Advanced Options**: Customizable prediction parameters and similarity thresholds
 - **Real-World Examples**: Pre-loaded profiles based on actual taxa from KG-Microbe
 - **Detailed Logging**: Full prediction logs for transparency
+- **Standalone**: All prediction code included - no external repo dependencies
 
 ### Output Tables
 1. **Prediction Results**: Ranked media with labels, scores, probabilities, and confidence levels
@@ -35,58 +38,34 @@ The service uses a **KOGUT (Relational Graph Transformer)** model trained on the
 ### Prerequisites
 
 1. **Python 3.9+** with [uv](https://github.com/astral-sh/uv) package manager (recommended)
-2. **MicroGrowLink repository** cloned as a sibling directory at `../MicroGrowLink/`
-3. **MicroGrowLink environment** with PyTorch and dependencies installed
-4. **Model file**: Trained KOGUT model (`.pt` file)
-5. **Knowledge graph data**: Nodes and edges TSV files
+2. **~3GB disk space** for model, data, and dependencies
+3. **Model and data files** from Google Drive (instructions below)
 
 ### Directory Structure (Expected)
 
 ```
-parent_directory/
-├── MicroGrowLink/                  # Core ML repository (cloned + data extracted)
-│   ├── .venv/                      # Python virtual environment with PyTorch
-│   │   └── bin/python              # Python interpreter used for predictions
-│   ├── models/
-│   │   └── kogut_20251026_212314.pt  # Trained KOGUT model (~150MB) [from Google Drive]
-│   ├── data/
-│   │   ├── merged-kg_edges.tsv     # KG edges (361MB) [from kgm_data.zip]
-│   │   ├── merged-kg_nodes.tsv     # KG nodes (233MB) [from kgm_data.zip]
-│   │   └── kogut/                  # KOGUT model data [from kogut_data.zip]
-│   │       ├── vocabularies.json   # Entity→ID mappings (1.3M entities, ~45MB)
-│   │       ├── train_graph.json    # Training graph structure
-│   │       ├── val_graph.json      # Validation graph
-│   │       ├── test_graph.json     # Test graph
-│   │       └── node_features.json  # Node feature vectors
-│   └── src/
-│       ├── __init__.py             # Must exist!
-│       ├── learn/
-│       │   ├── __init__.py         # Must exist!
-│       │   └── predict_novel_taxon.py  # Prediction script
-│       ├── utils/
-│       │   └── __init__.py         # Must exist!
-│       ├── eval/
-│       │   └── __init__.py         # Must exist!
-│       ├── predict/
-│       │   └── __init__.py         # Must exist!
-│       └── attic/
-│           └── __init__.py         # Must exist!
-│
-└── MicroGrowLinkService/           # This web application (this repository)
-    ├── .venv/                      # Separate lightweight venv (Gradio, pandas, duckdb)
-    ├── app.py                      # Main Gradio application
-    ├── config.py                   # Configuration (paths, model settings)
-    ├── data/
-    │   ├── kogut/
-    │   │   └── vocabularies.json   # Copy of vocabularies (for feature validation)
-    │   └── isolation_source_hierarchy.json  # 352 sources organized by 6 themes
-    ├── scripts/
-    │   └── build_isolation_source_hierarchy.py
-    └── src/
-        ├── feature_utils.py        # Feature building and validation
-        ├── predict.py              # Subprocess wrapper for predictions
-        ├── similar_taxa.py         # Find similar taxa in KG
-        └── ui_components.py        # Gradio UI components
+MicroGrowLinkService/              # This repository
+├── .venv/                         # Python virtual environment (created by uv)
+├── app.py                         # Main Gradio application
+├── config.py                      # Configuration (paths, model settings)
+├── models/                        # Model files [from Google Drive]
+│   └── kogut_20251026_212314.pt  # Trained KOGUT model (~150MB)
+├── data/                          # Data files [from Google Drive + generated]
+│   ├── merged-kg_edges.tsv       # KG edges (361MB) [from kgm_data.zip]
+│   ├── merged-kg_nodes.tsv       # KG nodes (233MB) [from kgm_data.zip]
+│   ├── kogut/                    # KOGUT model data [from kogut_data.zip]
+│   │   └── vocabularies.json     # Entity→ID mappings (1.3M entities, ~45MB)
+│   └── isolation_source_hierarchy.json  # Generated by build script
+├── scripts/
+│   └── build_isolation_source_hierarchy.py
+└── src/
+    ├── feature_utils.py          # Feature building and validation
+    ├── predict.py                # Direct model loading and prediction
+    ├── similar_taxa.py           # Find similar taxa in KG
+    ├── ui_components.py          # Gradio UI components
+    └── models/                   # Model architecture (new!)
+        ├── kogut_model.py        # KOGUT model definition
+        └── feature_encoder.py    # Feature encoding for predictions
 ```
 
 ## Installation
@@ -94,56 +73,38 @@ parent_directory/
 ### Overview
 
 This installation process involves:
-1. Setting up the **MicroGrowLink** ML environment (PyTorch, heavy dependencies)
-2. Downloading **3 files from Google Drive** (~615MB total):
+1. Installing **Python dependencies** (PyTorch, Gradio, etc.)
+2. Downloading **3 files from Google Drive** (~615MB compressed):
    - `kgm_data.zip` - Knowledge graph data (nodes and edges)
-   - `kogut_data.zip` - Model supporting data (vocabularies, graph structures)
+   - `kogut_data.zip` - Model supporting data (vocabularies)
    - `kogut_20251026_212314.pt` - Trained KOGUT model weights
-3. Setting up **MicroGrowLinkService** web app (Gradio, lightweight dependencies)
+3. Generating the **isolation source hierarchy** file
 
-**Total disk space required:** ~2.5GB (1.5GB for data, ~500MB for ML dependencies, ~500MB for environments)
+**Total disk space required:** ~3GB (1.5GB for data, ~1.5GB for PyTorch and dependencies)
 
-**Estimated time:** 15-30 minutes (depending on download speeds)
+**Estimated time:** 20-40 minutes (depending on download speeds and hardware)
 
-### Step 1: Install uv Package Manager
+### Step 1: Clone Repository and Install Dependencies
 
 ```bash
-# Install uv (if not already installed)
+# Clone this repository
+git clone https://github.com/realmarcin/MicroGrowLinkService.git
+cd MicroGrowLinkService
+
+# Install uv package manager (if not already installed)
 curl -LsSf https://astral.sh/uv/install.sh | sh
+source $HOME/.cargo/env  # Or restart your shell
 
-# Restart your shell or run:
-source $HOME/.cargo/env
+# Install dependencies (includes PyTorch, Gradio, pandas, duckdb, numpy)
+uv sync
+
+# Verify installation
+uv run python -c "import torch, gradio, pandas, duckdb; print('✓ All dependencies installed')"
 ```
 
-### Step 2: Set Up MicroGrowLink (Core ML Repository)
+**Note**: The first `uv sync` will download PyTorch (~1.5GB) and may take several minutes.
 
-```bash
-# Clone MicroGrowLink if not already done
-cd parent_directory
-git clone https://github.com/realmarcin/MicroGrowLink.git
-cd MicroGrowLink
-
-# Create __init__.py files in all src directories (CRITICAL!)
-touch src/__init__.py
-touch src/learn/__init__.py
-touch src/utils/__init__.py
-touch src/eval/__init__.py
-touch src/predict/__init__.py
-touch src/attic/__init__.py
-
-# Create virtual environment and install dependencies
-python -m venv .venv
-.venv/bin/pip install --upgrade pip
-.venv/bin/pip install -r requirements.txt
-
-# Verify PyTorch installation
-.venv/bin/python -c "import torch; print('✓ PyTorch', torch.__version__)"
-
-# Verify imports work
-.venv/bin/python -c "import src.learn.predict_novel_taxon; print('✓ Module imports working')"
-```
-
-### Step 3: Download Required Data Files from Google Drive
+### Step 2: Download Required Data Files from Google Drive
 
 All required data files and the trained KOGUT model are available on Google Drive:
 
@@ -188,22 +149,21 @@ ls -lh kgm_data.zip kogut_data.zip kogut_20251026_212314.pt
 **Note:** Replace `~/Downloads/microgrowlink_data` with your actual download location if different.
 
 ```bash
-# Navigate to MicroGrowLink directory
-cd /path/to/parent_directory/MicroGrowLink
+# Navigate to MicroGrowLinkService directory (where you cloned the repo)
+cd MicroGrowLinkService
 
-# 1. Extract KG-Microbe data to MicroGrowLink/data/
+# 1. Extract KG-Microbe data to data/
 unzip ~/Downloads/microgrowlink_data/kgm_data.zip -d data/
 # This creates:
 #   data/merged-kg_edges.tsv (361MB)
 #   data/merged-kg_nodes.tsv (233MB)
 
-# 2. Extract KOGUT supporting data to MicroGrowLink/data/
+# 2. Extract KOGUT supporting data to data/
 unzip ~/Downloads/microgrowlink_data/kogut_data.zip -d data/
 # This creates:
 #   data/kogut/vocabularies.json
-#   data/kogut/*.json (train/val/test graphs, node features)
 
-# 3. Move KOGUT model to MicroGrowLink/models/
+# 3. Move KOGUT model to models/
 mkdir -p models
 cp ~/Downloads/microgrowlink_data/kogut_20251026_212314.pt models/
 
@@ -222,16 +182,12 @@ ls -lh models/kogut_20251026_212314.pt
 
 **Expected directory structure after extraction:**
 ```
-MicroGrowLink/
+MicroGrowLinkService/
 ├── data/
 │   ├── merged-kg_edges.tsv         # 361MB - KG relationships (taxon↔trait, taxon↔media)
 │   ├── merged-kg_nodes.tsv         # 233MB - Entity labels and metadata
 │   └── kogut/
-│       ├── vocabularies.json       # 45MB - 1.3M entity→ID mappings
-│       ├── train_graph.json        # Training graph structure
-│       ├── val_graph.json          # Validation graph
-│       ├── test_graph.json         # Test graph
-│       └── node_features.json      # Node feature vectors
+│       └── vocabularies.json       # 45MB - 1.3M entity→ID mappings
 └── models/
     └── kogut_20251026_212314.pt    # 150MB - Trained KOGUT model weights
 ```
@@ -240,7 +196,7 @@ MicroGrowLink/
 
 ```bash
 # Check entity count in vocabularies
-python -c "import json; v=json.load(open('data/kogut/vocabularies.json')); print(f'✓ Loaded {len(v[\"entities\"]):,} entities and {len(v[\"relations\"]):,} relations')"
+uv run python -c "import json; v=json.load(open('data/kogut/vocabularies.json')); print(f'✓ Loaded {len(v[\"entities\"]):,} entities and {len(v[\"relations\"]):,} relations')"
 # Expected: ✓ Loaded 1,366,569 entities and 20 relations
 
 # Check KG node/edge counts
@@ -248,48 +204,7 @@ wc -l data/merged-kg_*.tsv
 # Expected: ~1.4M lines (edges), ~1.4M lines (nodes)
 ```
 
-### Step 4: Set Up MicroGrowLinkService (This Web App)
-
-```bash
-cd ../MicroGrowLinkService
-
-# Install dependencies using uv (creates lightweight .venv)
-# Only installs Gradio, pandas, duckdb - no heavy ML dependencies
-uv sync
-
-# Verify installation
-uv run python -c "import gradio; import pandas; import duckdb; print('✓ Dependencies installed')"
-```
-
-### Step 5: Prepare MicroGrowLinkService Data Files
-
-#### Copy Vocabularies File
-Copy the vocabularies file from MicroGrowLink to MicroGrowLinkService:
-
-```bash
-# Navigate to MicroGrowLinkService directory
-cd /path/to/parent_directory/MicroGrowLinkService
-
-# Create data directory structure
-mkdir -p data/kogut
-
-# Copy vocabularies.json from MicroGrowLink (extracted in Step 3)
-cp ../MicroGrowLink/data/kogut/vocabularies.json data/kogut/
-
-# Verify file exists and is valid JSON
-ls -lh data/kogut/vocabularies.json
-uv run python -c "import json; d=json.load(open('data/kogut/vocabularies.json')); print(f'✓ Loaded {len(d[\"entities\"]):,} entities and {len(d[\"relations\"]):,} relations')"
-```
-
-**Expected output:** `✓ Loaded 1,366,569 entities and 20 relations`
-
-**Note**: The KOGUT model requires `vocabularies.json` for entity encoding. If you're using a different model format (RotatE, ULTRA), you'll need `entity2id.txt` instead and should update `MODEL_TYPE` in `config.py`.
-
-**Why this file is needed in both locations:**
-- **MicroGrowLink/data/kogut/vocabularies.json**: Used by the prediction script when encoding features
-- **MicroGrowLinkService/data/kogut/vocabularies.json**: Used by the web app for feature validation (checking if features exist in the knowledge graph)
-
-#### Build Isolation Source Hierarchy
+### Step 3: Generate Isolation Source Hierarchy
 
 ```bash
 # Generate hierarchical organization of 352 isolation sources
@@ -311,28 +226,29 @@ uv run python scripts/build_isolation_source_hierarchy.py
 ls -lh data/isolation_source_hierarchy.json
 ```
 
-### Step 6: Configure Paths
+### Step 4: Configure Paths (Optional)
 
-Edit `config.py` to match your setup:
+The default configuration in `config.py` should work if you followed the steps above:
 
 ```python
 # Base directories
 BASE_DIR = Path(__file__).parent
-MICROGROWLINK_DIR = BASE_DIR.parent / "MicroGrowLink"  # Adjust if different location
 
-# Model configuration
-MODEL_PATH = MICROGROWLINK_DIR / "models" / "kogut_20251026_212314.pt"
-MODEL_TYPE = "kogut"  # or "rotate", "ultra" if using different models
+# Model configuration (local paths - no external dependencies!)
+MODEL_PATH = BASE_DIR / "models" / "kogut_20251026_212314.pt"
+MODEL_TYPE = "kogut"
 
 # Data configuration
 DATA_PATH = BASE_DIR / "data"  # Contains kogut/ subdirectory with vocabularies.json
 
 # Device configuration
 DEFAULT_DEVICE = "cpu"  # Change to "cuda" if GPU available
-DEFAULT_HIDDEN_DIM = 64  # KOGUT model's hidden dimension (verified from checkpoint)
+DEFAULT_HIDDEN_DIM = 64  # KOGUT model's hidden dimension
 ```
 
-### Step 7: Validate Configuration
+Only edit `config.py` if you placed files in non-standard locations.
+
+### Step 5: Validate Configuration
 
 ```bash
 # Run validation script
@@ -841,11 +757,42 @@ If you use MicroGrowLinkService in your research, please cite:
 }
 ```
 
+## Architecture
+
+### Standalone Design
+
+MicroGrowLinkService is now fully standalone with no external repository dependencies:
+
+- **Model Loading**: KOGUT model loaded directly via PyTorch
+- **Prediction**: Feature encoding and prediction in-process (no subprocess calls)
+- **Data**: All required files (model, vocabularies, KG data) stored locally
+- **Dependencies**: Single environment with PyTorch, Gradio, and utilities
+
+### Components
+
+1. **src/models/kogut_model.py**: KOGUT model architecture for inference
+2. **src/models/feature_encoder.py**: Feature encoding and prediction logic
+3. **src/predict.py**: Main prediction interface (loads model directly)
+4. **src/similar_taxa.py**: Find similar taxa using DuckDB queries
+5. **src/feature_utils.py**: Feature validation and utilities
+6. **app.py**: Gradio web interface
+
 ## Related Projects
 
-- **[MicroGrowLink](https://github.com/realmarcin/MicroGrowLink)** - Core prediction models, training pipeline, and graph transformers
 - **[KG-Microbe](https://github.com/KG-Hub/KG-Microbe)** - Microbial knowledge graph construction and integration
 - **[KG-Hub](https://github.com/KG-Hub)** - Knowledge graph tools, resources, and best practices
+
+## Migration from MicroGrowLink
+
+**Previous architecture** (deprecated): MicroGrowLinkService called MicroGrowLink via subprocess
+
+**Current architecture**: All prediction code is included in this repository
+
+If you're upgrading from an older version:
+1. Pull the latest code
+2. Run `uv sync` to install PyTorch dependencies
+3. Download model and data files to local directories
+4. Remove references to MicroGrowLink in your configuration
 
 ## License
 

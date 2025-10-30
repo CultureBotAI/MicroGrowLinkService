@@ -13,11 +13,15 @@ dependencies = [
     # Web Interface
     "gradio>=4.0.0",
 
-    # Data Processing (for reading prediction results)
+    # Data Processing
     "pandas>=2.2.3",
 
     # Database for querying knowledge graph
     "duckdb>=0.10.0",
+
+    # Machine Learning (KOGUT model)
+    "torch>=2.0.0",
+    "numpy>=1.24.0",
 ]
 
 [project.urls]

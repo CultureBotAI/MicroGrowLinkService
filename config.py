@@ -7,14 +7,13 @@ from pathlib import Path
 
 # Base directories
 BASE_DIR = Path(__file__).parent
-MICROGROWLINK_DIR = BASE_DIR.parent / "MicroGrowLink"
+MICROGROWLINK_DIR = BASE_DIR.parent / "MicroGrowLink"  # Still used for KG files reference
 
 # Model configuration
-MODEL_PATH = MICROGROWLINK_DIR / "models" / "kogut_20251026_212314.pt"
+MODEL_PATH = BASE_DIR / "models" / "kogut_20251026_212314.pt"
 MODEL_TYPE = "kogut"
 
 # Data configuration
-# Use local data directory - the prediction script will add model-specific subdirectory (e.g., kogut/)
 DATA_PATH = BASE_DIR / "data"
 
 # Device configuration
