@@ -1,0 +1,1774 @@
+{
+  "Host-Associated": [
+    {
+      "id": "isolation_source:animal-feed",
+      "value": "animal-feed",
+      "label": "Animal-feed"
+    },
+    {
+      "id": "isolation_source:animal-habitation-nest,burrow",
+      "value": "animal-habitation-nest,burrow",
+      "label": "Animal-habitation-Nest,Burrow"
+    },
+    {
+      "id": "isolation_source:animal-produced-food-natural",
+      "value": "animal-produced-food-natural",
+      "label": "Animal-produced-food-natural"
+    },
+    {
+      "id": "isolation_source:aspirate",
+      "value": "aspirate",
+      "label": "Aspirate"
+    },
+    {
+      "id": "isolation_source:birds",
+      "value": "birds",
+      "label": "Birds"
+    },
+    {
+      "id": "isolation_source:blood",
+      "value": "blood",
+      "label": "Blood"
+    },
+    {
+      "id": "isolation_source:blood-culture",
+      "value": "blood-culture",
+      "label": "Blood-culture"
+    },
+    {
+      "id": "isolation_source:bovinae-cow,-cattle",
+      "value": "bovinae-cow,-cattle",
+      "label": "Bovinae-Cow,-Cattle"
+    },
+    {
+      "id": "isolation_source:canidae-dog",
+      "value": "canidae-dog",
+      "label": "Canidae-Dog"
+    },
+    {
+      "id": "isolation_source:caprinae-sheep/goat",
+      "value": "caprinae-sheep/goat",
+      "label": "Caprinae-Sheep/Goat"
+    },
+    {
+      "id": "isolation_source:catheter",
+      "value": "catheter",
+      "label": "Catheter"
+    },
+    {
+      "id": "isolation_source:cnidaria-corals",
+      "value": "cnidaria-corals",
+      "label": "Cnidaria-Corals"
+    },
+    {
+      "id": "isolation_source:coral-reef",
+      "value": "coral-reef",
+      "label": "Coral-reef"
+    },
+    {
+      "id": "isolation_source:decomposing-animal",
+      "value": "decomposing-animal",
+      "label": "Decomposing-animal"
+    },
+    {
+      "id": "isolation_source:digestive-fluid",
+      "value": "digestive-fluid",
+      "label": "Digestive-fluid"
+    },
+    {
+      "id": "isolation_source:feces-stool",
+      "value": "feces-stool",
+      "label": "Feces-Stool"
+    },
+    {
+      "id": "isolation_source:felidae-cat",
+      "value": "felidae-cat",
+      "label": "Felidae-Cat"
+    },
+    {
+      "id": "isolation_source:fishes",
+      "value": "fishes",
+      "label": "Fishes"
+    },
+    {
+      "id": "isolation_source:gastrointestinal-tract",
+      "value": "gastrointestinal-tract",
+      "label": "Gastrointestinal-tract"
+    },
+    {
+      "id": "isolation_source:host",
+      "value": "host",
+      "label": "Host"
+    },
+    {
+      "id": "isolation_source:host-body-product",
+      "value": "host-body-product",
+      "label": "Host-Body-Product"
+    },
+    {
+      "id": "isolation_source:host-body-site",
+      "value": "host-body-site",
+      "label": "Host-Body-Site"
+    },
+    {
+      "id": "isolation_source:human",
+      "value": "human",
+      "label": "Human"
+    },
+    {
+      "id": "isolation_source:insecta",
+      "value": "insecta",
+      "label": "Insecta"
+    },
+    {
+      "id": "isolation_source:invertebrates-other",
+      "value": "invertebrates-other",
+      "label": "Invertebrates-Other"
+    },
+    {
+      "id": "isolation_source:laboratory",
+      "value": "laboratory",
+      "label": "Laboratory"
+    },
+    {
+      "id": "isolation_source:large-intestine",
+      "value": "large-intestine",
+      "label": "Large-intestine"
+    },
+    {
+      "id": "isolation_source:mammals",
+      "value": "mammals",
+      "label": "Mammals"
+    },
+    {
+      "id": "isolation_source:mouth",
+      "value": "mouth",
+      "label": "Mouth"
+    },
+    {
+      "id": "isolation_source:muridae-mouse/rat",
+      "value": "muridae-mouse/rat",
+      "label": "Muridae-Mouse/Rat"
+    },
+    {
+      "id": "isolation_source:oral-cavity-and-airways",
+      "value": "oral-cavity-and-airways",
+      "label": "Oral-cavity-and-airways"
+    },
+    {
+      "id": "isolation_source:organ",
+      "value": "organ",
+      "label": "Organ"
+    },
+    {
+      "id": "isolation_source:patient",
+      "value": "patient",
+      "label": "Patient"
+    },
+    {
+      "id": "isolation_source:skin,-nail,-hair",
+      "value": "skin,-nail,-hair",
+      "label": "Skin,-Nail,-Hair"
+    },
+    {
+      "id": "isolation_source:small-intestine",
+      "value": "small-intestine",
+      "label": "Small-intestine"
+    },
+    {
+      "id": "isolation_source:solid-animal-waste",
+      "value": "solid-animal-waste",
+      "label": "Solid-animal-waste"
+    },
+    {
+      "id": "isolation_source:sputum",
+      "value": "sputum",
+      "label": "Sputum"
+    },
+    {
+      "id": "isolation_source:suidae-pig,swine",
+      "value": "suidae-pig,swine",
+      "label": "Suidae-Pig,Swine"
+    },
+    {
+      "id": "isolation_source:temperate",
+      "value": "temperate",
+      "label": "Temperate"
+    },
+    {
+      "id": "isolation_source:tunicata",
+      "value": "tunicata",
+      "label": "Tunicata"
+    },
+    {
+      "id": "isolation_source:urine",
+      "value": "urine",
+      "label": "Urine"
+    },
+    {
+      "id": "isolation_source:zebrafish",
+      "value": "zebrafish",
+      "label": "Zebrafish"
+    }
+  ],
+  "Environmental": [
+    {
+      "id": "isolation_source:air",
+      "value": "air",
+      "label": "Air"
+    },
+    {
+      "id": "isolation_source:air-conditioner",
+      "value": "air-conditioner",
+      "label": "Air-conditioner"
+    },
+    {
+      "id": "isolation_source:airways",
+      "value": "airways",
+      "label": "Airways"
+    },
+    {
+      "id": "isolation_source:aquatic",
+      "value": "aquatic",
+      "label": "Aquatic"
+    },
+    {
+      "id": "isolation_source:aquatic-mammal",
+      "value": "aquatic-mammal",
+      "label": "Aquatic-mammal"
+    },
+    {
+      "id": "isolation_source:aquatic-plant",
+      "value": "aquatic-plant",
+      "label": "Aquatic-plant"
+    },
+    {
+      "id": "isolation_source:cave-water",
+      "value": "cave-water",
+      "label": "Cave-water"
+    },
+    {
+      "id": "isolation_source:coalbed-water",
+      "value": "coalbed-water",
+      "label": "Coalbed-water"
+    },
+    {
+      "id": "isolation_source:dairy-product",
+      "value": "dairy-product",
+      "label": "Dairy-product"
+    },
+    {
+      "id": "isolation_source:desert",
+      "value": "desert",
+      "label": "Desert"
+    },
+    {
+      "id": "isolation_source:environmental",
+      "value": "environmental",
+      "label": "Environmental"
+    },
+    {
+      "id": "isolation_source:estuary",
+      "value": "estuary",
+      "label": "Estuary"
+    },
+    {
+      "id": "isolation_source:forest",
+      "value": "forest",
+      "label": "Forest"
+    },
+    {
+      "id": "isolation_source:freshwater",
+      "value": "freshwater",
+      "label": "Freshwater"
+    },
+    {
+      "id": "isolation_source:groundwater",
+      "value": "groundwater",
+      "label": "Groundwater"
+    },
+    {
+      "id": "isolation_source:hydrothermal-vent",
+      "value": "hydrothermal-vent",
+      "label": "Hydrothermal-vent"
+    },
+    {
+      "id": "isolation_source:indoor-air",
+      "value": "indoor-air",
+      "label": "Indoor-Air"
+    },
+    {
+      "id": "isolation_source:industrial-wastewater",
+      "value": "industrial-wastewater",
+      "label": "Industrial-wastewater"
+    },
+    {
+      "id": "isolation_source:lake-large",
+      "value": "lake-large",
+      "label": "Lake-large"
+    },
+    {
+      "id": "isolation_source:mangrove",
+      "value": "mangrove",
+      "label": "Mangrove"
+    },
+    {
+      "id": "isolation_source:marine",
+      "value": "marine",
+      "label": "Marine"
+    },
+    {
+      "id": "isolation_source:non-marine-saline-and-alkaline",
+      "value": "non-marine-saline-and-alkaline",
+      "label": "Non-marine-Saline-and-Alkaline"
+    },
+    {
+      "id": "isolation_source:outdoor-air",
+      "value": "outdoor-air",
+      "label": "Outdoor-Air"
+    },
+    {
+      "id": "isolation_source:plant-litter-forest",
+      "value": "plant-litter-forest",
+      "label": "Plant-litter-Forest"
+    },
+    {
+      "id": "isolation_source:river-creek",
+      "value": "river-creek",
+      "label": "River-Creek"
+    },
+    {
+      "id": "isolation_source:seafood",
+      "value": "seafood",
+      "label": "Seafood"
+    },
+    {
+      "id": "isolation_source:sediment",
+      "value": "sediment",
+      "label": "Sediment"
+    },
+    {
+      "id": "isolation_source:soil",
+      "value": "soil",
+      "label": "Soil"
+    },
+    {
+      "id": "isolation_source:subarctic",
+      "value": "subarctic",
+      "label": "Subarctic"
+    },
+    {
+      "id": "isolation_source:subtropical",
+      "value": "subtropical",
+      "label": "Subtropical"
+    },
+    {
+      "id": "isolation_source:surface-water",
+      "value": "surface-water",
+      "label": "Surface-water"
+    },
+    {
+      "id": "isolation_source:terrestrial",
+      "value": "terrestrial",
+      "label": "Terrestrial"
+    },
+    {
+      "id": "isolation_source:tidal-flat",
+      "value": "tidal-flat",
+      "label": "Tidal-flat"
+    },
+    {
+      "id": "isolation_source:tropical",
+      "value": "tropical",
+      "label": "Tropical"
+    },
+    {
+      "id": "isolation_source:tundra",
+      "value": "tundra",
+      "label": "Tundra"
+    },
+    {
+      "id": "isolation_source:volcanic",
+      "value": "volcanic",
+      "label": "Volcanic"
+    },
+    {
+      "id": "isolation_source:wastewater",
+      "value": "wastewater",
+      "label": "Wastewater"
+    },
+    {
+      "id": "isolation_source:water-reservoir-aquarium/pool",
+      "value": "water-reservoir-aquarium/pool",
+      "label": "Water-reservoir-Aquarium/pool"
+    },
+    {
+      "id": "isolation_source:water-treatment-plant",
+      "value": "water-treatment-plant",
+      "label": "Water-treatment-plant"
+    },
+    {
+      "id": "isolation_source:wetland-swamp",
+      "value": "wetland-swamp",
+      "label": "Wetland-Swamp"
+    }
+  ],
+  "Medical/Clinical": [
+    {
+      "id": "isolation_source:abscess",
+      "value": "abscess",
+      "label": "Abscess"
+    },
+    {
+      "id": "isolation_source:clinic",
+      "value": "clinic",
+      "label": "Clinic"
+    },
+    {
+      "id": "isolation_source:cystic-fibrosis",
+      "value": "cystic-fibrosis",
+      "label": "Cystic-fibrosis"
+    },
+    {
+      "id": "isolation_source:disease",
+      "value": "disease",
+      "label": "Disease"
+    },
+    {
+      "id": "isolation_source:infection",
+      "value": "infection",
+      "label": "Infection"
+    },
+    {
+      "id": "isolation_source:inflammation",
+      "value": "inflammation",
+      "label": "Inflammation"
+    },
+    {
+      "id": "isolation_source:medical-device",
+      "value": "medical-device",
+      "label": "Medical-device"
+    },
+    {
+      "id": "isolation_source:medical-environment",
+      "value": "medical-environment",
+      "label": "Medical-environment"
+    },
+    {
+      "id": "isolation_source:medical-practice",
+      "value": "medical-practice",
+      "label": "Medical-practice"
+    },
+    {
+      "id": "isolation_source:medical-product",
+      "value": "medical-product",
+      "label": "Medical-product"
+    },
+    {
+      "id": "isolation_source:meningitis",
+      "value": "meningitis",
+      "label": "Meningitis"
+    },
+    {
+      "id": "isolation_source:plant-infections",
+      "value": "plant-infections",
+      "label": "Plant-infections"
+    },
+    {
+      "id": "isolation_source:wound",
+      "value": "wound",
+      "label": "Wound"
+    },
+    {
+      "id": "isolation_source:wound-fluid",
+      "value": "wound-fluid",
+      "label": "Wound-fluid"
+    }
+  ],
+  "Laboratory/Engineered": [
+    {
+      "id": "isolation_source:agriculture",
+      "value": "agriculture",
+      "label": "Agriculture"
+    },
+    {
+      "id": "isolation_source:aquaculture",
+      "value": "aquaculture",
+      "label": "Aquaculture"
+    },
+    {
+      "id": "isolation_source:bioreactor",
+      "value": "bioreactor",
+      "label": "Bioreactor"
+    },
+    {
+      "id": "isolation_source:co-culture",
+      "value": "co-culture",
+      "label": "Co-culture"
+    },
+    {
+      "id": "isolation_source:engineered",
+      "value": "engineered",
+      "label": "Engineered"
+    },
+    {
+      "id": "isolation_source:engineered-product",
+      "value": "engineered-product",
+      "label": "Engineered-product"
+    },
+    {
+      "id": "isolation_source:industrial",
+      "value": "industrial",
+      "label": "Industrial"
+    },
+    {
+      "id": "isolation_source:industrial-production",
+      "value": "industrial-production",
+      "label": "Industrial-production"
+    },
+    {
+      "id": "isolation_source:industrial-waste",
+      "value": "industrial-waste",
+      "label": "Industrial-waste"
+    },
+    {
+      "id": "isolation_source:starter-culture",
+      "value": "starter-culture",
+      "label": "Starter-culture"
+    }
+  ],
+  "Food/Agriculture": [
+    {
+      "id": "isolation_source:beverage",
+      "value": "beverage",
+      "label": "Beverage"
+    },
+    {
+      "id": "isolation_source:bottled,-canned,-packed-food",
+      "value": "bottled,-canned,-packed-food",
+      "label": "Bottled,-canned,-packed-food"
+    },
+    {
+      "id": "isolation_source:composting",
+      "value": "composting",
+      "label": "Composting"
+    },
+    {
+      "id": "isolation_source:decomposing-plant",
+      "value": "decomposing-plant",
+      "label": "Decomposing-plant"
+    },
+    {
+      "id": "isolation_source:fermented",
+      "value": "fermented",
+      "label": "Fermented"
+    },
+    {
+      "id": "isolation_source:food",
+      "value": "food",
+      "label": "Food"
+    },
+    {
+      "id": "isolation_source:food-production",
+      "value": "food-production",
+      "label": "Food-production"
+    },
+    {
+      "id": "isolation_source:fruit-seed",
+      "value": "fruit-seed",
+      "label": "Fruit-Seed"
+    },
+    {
+      "id": "isolation_source:herbaceous-plants-grass,crops",
+      "value": "herbaceous-plants-grass,crops",
+      "label": "Herbaceous-plants-Grass,Crops"
+    },
+    {
+      "id": "isolation_source:leaf-phyllosphere",
+      "value": "leaf-phyllosphere",
+      "label": "Leaf-Phyllosphere"
+    },
+    {
+      "id": "isolation_source:meat",
+      "value": "meat",
+      "label": "Meat"
+    },
+    {
+      "id": "isolation_source:milk",
+      "value": "milk",
+      "label": "Milk"
+    },
+    {
+      "id": "isolation_source:oil-food",
+      "value": "oil-food",
+      "label": "Oil-Food"
+    },
+    {
+      "id": "isolation_source:plant",
+      "value": "plant",
+      "label": "Plant"
+    },
+    {
+      "id": "isolation_source:plant-factory",
+      "value": "plant-factory",
+      "label": "Plant-Factory"
+    },
+    {
+      "id": "isolation_source:plant-exudate-resin",
+      "value": "plant-exudate-resin",
+      "label": "Plant-exudate-Resin"
+    },
+    {
+      "id": "isolation_source:plant-sap-flux",
+      "value": "plant-sap-flux",
+      "label": "Plant-sap-Flux"
+    },
+    {
+      "id": "isolation_source:plantation",
+      "value": "plantation",
+      "label": "Plantation"
+    },
+    {
+      "id": "isolation_source:plants",
+      "value": "plants",
+      "label": "Plants"
+    },
+    {
+      "id": "isolation_source:root-rhizome",
+      "value": "root-rhizome",
+      "label": "Root-Rhizome"
+    },
+    {
+      "id": "isolation_source:root-tooth",
+      "value": "root-tooth",
+      "label": "Root-Tooth"
+    },
+    {
+      "id": "isolation_source:root-nodule",
+      "value": "root-nodule",
+      "label": "Root-nodule"
+    },
+    {
+      "id": "isolation_source:rot-root,stem",
+      "value": "rot-root,stem",
+      "label": "Rot-Root,Stem"
+    },
+    {
+      "id": "isolation_source:solid-plant-waste",
+      "value": "solid-plant-waste",
+      "label": "Solid-plant-waste"
+    },
+    {
+      "id": "isolation_source:spot-leaf,stem",
+      "value": "spot-leaf,stem",
+      "label": "Spot-Leaf,Stem"
+    },
+    {
+      "id": "isolation_source:sterilized-plant-part",
+      "value": "sterilized-plant-part",
+      "label": "Sterilized-plant-part"
+    },
+    {
+      "id": "isolation_source:sugary-food",
+      "value": "sugary-food",
+      "label": "Sugary-food"
+    },
+    {
+      "id": "isolation_source:vegetable-incl.-grains",
+      "value": "vegetable-incl.-grains",
+      "label": "Vegetable-incl.-Grains"
+    }
+  ],
+  "Other": [
+    {
+      "id": "isolation_source:abdomen",
+      "value": "abdomen",
+      "label": "Abdomen"
+    },
+    {
+      "id": "isolation_source:abort",
+      "value": "abort",
+      "label": "Abort"
+    },
+    {
+      "id": "isolation_source:acidic",
+      "value": "acidic",
+      "label": "Acidic"
+    },
+    {
+      "id": "isolation_source:activated-sludge",
+      "value": "activated-sludge",
+      "label": "Activated-sludge"
+    },
+    {
+      "id": "isolation_source:algae",
+      "value": "algae",
+      "label": "Algae"
+    },
+    {
+      "id": "isolation_source:alkaline",
+      "value": "alkaline",
+      "label": "Alkaline"
+    },
+    {
+      "id": "isolation_source:alpine",
+      "value": "alpine",
+      "label": "Alpine"
+    },
+    {
+      "id": "isolation_source:amniotic-fluid",
+      "value": "amniotic-fluid",
+      "label": "Amniotic-fluid"
+    },
+    {
+      "id": "isolation_source:amphibia",
+      "value": "amphibia",
+      "label": "Amphibia"
+    },
+    {
+      "id": "isolation_source:anaerobic-digestor",
+      "value": "anaerobic-digestor",
+      "label": "Anaerobic-digestor"
+    },
+    {
+      "id": "isolation_source:ankle",
+      "value": "ankle",
+      "label": "Ankle"
+    },
+    {
+      "id": "isolation_source:annelida",
+      "value": "annelida",
+      "label": "Annelida"
+    },
+    {
+      "id": "isolation_source:anoxic-anaerobic",
+      "value": "anoxic-anaerobic",
+      "label": "Anoxic-anaerobic"
+    },
+    {
+      "id": "isolation_source:antibiotic-treatment",
+      "value": "antibiotic-treatment",
+      "label": "Antibiotic-treatment"
+    },
+    {
+      "id": "isolation_source:arid",
+      "value": "arid",
+      "label": "Arid"
+    },
+    {
+      "id": "isolation_source:arm",
+      "value": "arm",
+      "label": "Arm"
+    },
+    {
+      "id": "isolation_source:arthropoda",
+      "value": "arthropoda",
+      "label": "Arthropoda"
+    },
+    {
+      "id": "isolation_source:bacteria",
+      "value": "bacteria",
+      "label": "Bacteria"
+    },
+    {
+      "id": "isolation_source:bark",
+      "value": "bark",
+      "label": "Bark"
+    },
+    {
+      "id": "isolation_source:biodegradation",
+      "value": "biodegradation",
+      "label": "Biodegradation"
+    },
+    {
+      "id": "isolation_source:biofilm",
+      "value": "biofilm",
+      "label": "Biofilm"
+    },
+    {
+      "id": "isolation_source:biofilter",
+      "value": "biofilter",
+      "label": "Biofilter"
+    },
+    {
+      "id": "isolation_source:biopsy",
+      "value": "biopsy",
+      "label": "Biopsy"
+    },
+    {
+      "id": "isolation_source:bioremediation",
+      "value": "bioremediation",
+      "label": "Bioremediation"
+    },
+    {
+      "id": "isolation_source:bladder",
+      "value": "bladder",
+      "label": "Bladder"
+    },
+    {
+      "id": "isolation_source:bladder-stone",
+      "value": "bladder-stone",
+      "label": "Bladder-stone"
+    },
+    {
+      "id": "isolation_source:bone",
+      "value": "bone",
+      "label": "Bone"
+    },
+    {
+      "id": "isolation_source:boreal",
+      "value": "boreal",
+      "label": "Boreal"
+    },
+    {
+      "id": "isolation_source:brackish",
+      "value": "brackish",
+      "label": "Brackish"
+    },
+    {
+      "id": "isolation_source:brain",
+      "value": "brain",
+      "label": "Brain"
+    },
+    {
+      "id": "isolation_source:bronchial-wash",
+      "value": "bronchial-wash",
+      "label": "Bronchial-wash"
+    },
+    {
+      "id": "isolation_source:brown-algae",
+      "value": "brown-algae",
+      "label": "Brown-Algae"
+    },
+    {
+      "id": "isolation_source:built-environment",
+      "value": "built-environment",
+      "label": "Built-environment"
+    },
+    {
+      "id": "isolation_source:caecal-content",
+      "value": "caecal-content",
+      "label": "Caecal-content"
+    },
+    {
+      "id": "isolation_source:canker",
+      "value": "canker",
+      "label": "Canker"
+    },
+    {
+      "id": "isolation_source:cerebrospinal-fluid",
+      "value": "cerebrospinal-fluid",
+      "label": "Cerebrospinal-fluid"
+    },
+    {
+      "id": "isolation_source:chicken",
+      "value": "chicken",
+      "label": "Chicken"
+    },
+    {
+      "id": "isolation_source:child",
+      "value": "child",
+      "label": "Child"
+    },
+    {
+      "id": "isolation_source:clean-room",
+      "value": "clean-room",
+      "label": "Clean-room"
+    },
+    {
+      "id": "isolation_source:climate",
+      "value": "climate",
+      "label": "Climate"
+    },
+    {
+      "id": "isolation_source:coast",
+      "value": "coast",
+      "label": "Coast"
+    },
+    {
+      "id": "isolation_source:cold",
+      "value": "cold",
+      "label": "Cold"
+    },
+    {
+      "id": "isolation_source:condition",
+      "value": "condition",
+      "label": "Condition"
+    },
+    {
+      "id": "isolation_source:container-reservoir",
+      "value": "container-reservoir",
+      "label": "Container-Reservoir"
+    },
+    {
+      "id": "isolation_source:contaminant",
+      "value": "contaminant",
+      "label": "Contaminant"
+    },
+    {
+      "id": "isolation_source:contamination",
+      "value": "contamination",
+      "label": "Contamination"
+    },
+    {
+      "id": "isolation_source:cooling-tower",
+      "value": "cooling-tower",
+      "label": "Cooling-tower"
+    },
+    {
+      "id": "isolation_source:core-sample",
+      "value": "core-sample",
+      "label": "Core-sample"
+    },
+    {
+      "id": "isolation_source:cotton-other-fibres",
+      "value": "cotton-other-fibres",
+      "label": "Cotton-other-fibres"
+    },
+    {
+      "id": "isolation_source:crustacea",
+      "value": "crustacea",
+      "label": "Crustacea"
+    },
+    {
+      "id": "isolation_source:currency",
+      "value": "currency",
+      "label": "Currency"
+    },
+    {
+      "id": "isolation_source:decomposing-algae",
+      "value": "decomposing-algae",
+      "label": "Decomposing-algae"
+    },
+    {
+      "id": "isolation_source:defined-media",
+      "value": "defined-media",
+      "label": "Defined-media"
+    },
+    {
+      "id": "isolation_source:dental-plaque",
+      "value": "dental-plaque",
+      "label": "Dental-plaque"
+    },
+    {
+      "id": "isolation_source:dinoflagellate",
+      "value": "dinoflagellate",
+      "label": "Dinoflagellate"
+    },
+    {
+      "id": "isolation_source:domestic-waste",
+      "value": "domestic-waste",
+      "label": "Domestic-waste"
+    },
+    {
+      "id": "isolation_source:dust",
+      "value": "dust",
+      "label": "Dust"
+    },
+    {
+      "id": "isolation_source:dust-ash",
+      "value": "dust-ash",
+      "label": "Dust-Ash"
+    },
+    {
+      "id": "isolation_source:ear",
+      "value": "ear",
+      "label": "Ear"
+    },
+    {
+      "id": "isolation_source:echinodermata",
+      "value": "echinodermata",
+      "label": "Echinodermata"
+    },
+    {
+      "id": "isolation_source:egg",
+      "value": "egg",
+      "label": "Egg"
+    },
+    {
+      "id": "isolation_source:endosphere",
+      "value": "endosphere",
+      "label": "Endosphere"
+    },
+    {
+      "id": "isolation_source:endosymbiont",
+      "value": "endosymbiont",
+      "label": "Endosymbiont"
+    },
+    {
+      "id": "isolation_source:epibiont",
+      "value": "epibiont",
+      "label": "Epibiont"
+    },
+    {
+      "id": "isolation_source:equidae-horse",
+      "value": "equidae-horse",
+      "label": "Equidae-Horse"
+    },
+    {
+      "id": "isolation_source:extracellular",
+      "value": "extracellular",
+      "label": "Extracellular"
+    },
+    {
+      "id": "isolation_source:eye",
+      "value": "eye",
+      "label": "Eye"
+    },
+    {
+      "id": "isolation_source:female",
+      "value": "female",
+      "label": "Female"
+    },
+    {
+      "id": "isolation_source:field",
+      "value": "field",
+      "label": "Field"
+    },
+    {
+      "id": "isolation_source:flower",
+      "value": "flower",
+      "label": "Flower"
+    },
+    {
+      "id": "isolation_source:fluids",
+      "value": "fluids",
+      "label": "Fluids"
+    },
+    {
+      "id": "isolation_source:foam",
+      "value": "foam",
+      "label": "Foam"
+    },
+    {
+      "id": "isolation_source:foot",
+      "value": "foot",
+      "label": "Foot"
+    },
+    {
+      "id": "isolation_source:fungi",
+      "value": "fungi",
+      "label": "Fungi"
+    },
+    {
+      "id": "isolation_source:gall",
+      "value": "gall",
+      "label": "Gall"
+    },
+    {
+      "id": "isolation_source:garden",
+      "value": "garden",
+      "label": "Garden"
+    },
+    {
+      "id": "isolation_source:geologic",
+      "value": "geologic",
+      "label": "Geologic"
+    },
+    {
+      "id": "isolation_source:gingiva",
+      "value": "gingiva",
+      "label": "Gingiva"
+    },
+    {
+      "id": "isolation_source:glacier",
+      "value": "glacier",
+      "label": "Glacier"
+    },
+    {
+      "id": "isolation_source:grassland",
+      "value": "grassland",
+      "label": "Grassland"
+    },
+    {
+      "id": "isolation_source:green-algae",
+      "value": "green-algae",
+      "label": "Green-algae"
+    },
+    {
+      "id": "isolation_source:greenhouse",
+      "value": "greenhouse",
+      "label": "Greenhouse"
+    },
+    {
+      "id": "isolation_source:grove-orchard",
+      "value": "grove-orchard",
+      "label": "Grove-Orchard"
+    },
+    {
+      "id": "isolation_source:hand",
+      "value": "hand",
+      "label": "Hand"
+    },
+    {
+      "id": "isolation_source:head",
+      "value": "head",
+      "label": "Head"
+    },
+    {
+      "id": "isolation_source:heart",
+      "value": "heart",
+      "label": "Heart"
+    },
+    {
+      "id": "isolation_source:heart-valve",
+      "value": "heart-valve",
+      "label": "Heart-valve"
+    },
+    {
+      "id": "isolation_source:heated-burned",
+      "value": "heated-burned",
+      "label": "Heated-Burned"
+    },
+    {
+      "id": "isolation_source:heavy-metal",
+      "value": "heavy-metal",
+      "label": "Heavy-metal"
+    },
+    {
+      "id": "isolation_source:hot",
+      "value": "hot",
+      "label": "Hot"
+    },
+    {
+      "id": "isolation_source:house",
+      "value": "house",
+      "label": "House"
+    },
+    {
+      "id": "isolation_source:humid",
+      "value": "humid",
+      "label": "Humid"
+    },
+    {
+      "id": "isolation_source:ice",
+      "value": "ice",
+      "label": "Ice"
+    },
+    {
+      "id": "isolation_source:immunocompromised",
+      "value": "immunocompromised",
+      "label": "Immunocompromised"
+    },
+    {
+      "id": "isolation_source:in-situ",
+      "value": "in-situ",
+      "label": "In-situ"
+    },
+    {
+      "id": "isolation_source:indoor",
+      "value": "indoor",
+      "label": "Indoor"
+    },
+    {
+      "id": "isolation_source:intracellular",
+      "value": "intracellular",
+      "label": "Intracellular"
+    },
+    {
+      "id": "isolation_source:iron-mat",
+      "value": "iron-mat",
+      "label": "Iron-mat"
+    },
+    {
+      "id": "isolation_source:joint",
+      "value": "joint",
+      "label": "Joint"
+    },
+    {
+      "id": "isolation_source:juice-natural",
+      "value": "juice-natural",
+      "label": "Juice-natural"
+    },
+    {
+      "id": "isolation_source:juvenile",
+      "value": "juvenile",
+      "label": "Juvenile"
+    },
+    {
+      "id": "isolation_source:kidney",
+      "value": "kidney",
+      "label": "Kidney"
+    },
+    {
+      "id": "isolation_source:lab-enrichment",
+      "value": "lab-enrichment",
+      "label": "Lab-enrichment"
+    },
+    {
+      "id": "isolation_source:lab-synthesis",
+      "value": "lab-synthesis",
+      "label": "Lab-synthesis"
+    },
+    {
+      "id": "isolation_source:landfill",
+      "value": "landfill",
+      "label": "Landfill"
+    },
+    {
+      "id": "isolation_source:leg",
+      "value": "leg",
+      "label": "Leg"
+    },
+    {
+      "id": "isolation_source:leporidae-rabbit/hare",
+      "value": "leporidae-rabbit/hare",
+      "label": "Leporidae-Rabbit/Hare"
+    },
+    {
+      "id": "isolation_source:lesion-incl.-necrosis",
+      "value": "lesion-incl.-necrosis",
+      "label": "Lesion-incl.-Necrosis"
+    },
+    {
+      "id": "isolation_source:lichen",
+      "value": "lichen",
+      "label": "Lichen"
+    },
+    {
+      "id": "isolation_source:limb",
+      "value": "limb",
+      "label": "Limb"
+    },
+    {
+      "id": "isolation_source:liver",
+      "value": "liver",
+      "label": "Liver"
+    },
+    {
+      "id": "isolation_source:livestock-husbandry",
+      "value": "livestock-husbandry",
+      "label": "Livestock-Husbandry"
+    },
+    {
+      "id": "isolation_source:lung",
+      "value": "lung",
+      "label": "Lung"
+    },
+    {
+      "id": "isolation_source:lymph-node",
+      "value": "lymph-node",
+      "label": "Lymph-node"
+    },
+    {
+      "id": "isolation_source:machines-and-devices",
+      "value": "machines-and-devices",
+      "label": "Machines-and-devices"
+    },
+    {
+      "id": "isolation_source:male",
+      "value": "male",
+      "label": "Male"
+    },
+    {
+      "id": "isolation_source:mammary-gland",
+      "value": "mammary-gland",
+      "label": "Mammary-gland"
+    },
+    {
+      "id": "isolation_source:meadow",
+      "value": "meadow",
+      "label": "Meadow"
+    },
+    {
+      "id": "isolation_source:microbial",
+      "value": "microbial",
+      "label": "Microbial"
+    },
+    {
+      "id": "isolation_source:microbial-community",
+      "value": "microbial-community",
+      "label": "Microbial-community"
+    },
+    {
+      "id": "isolation_source:microbial-mat",
+      "value": "microbial-mat",
+      "label": "Microbial-mat"
+    },
+    {
+      "id": "isolation_source:mine",
+      "value": "mine",
+      "label": "Mine"
+    },
+    {
+      "id": "isolation_source:mollusca",
+      "value": "mollusca",
+      "label": "Mollusca"
+    },
+    {
+      "id": "isolation_source:moss",
+      "value": "moss",
+      "label": "Moss"
+    },
+    {
+      "id": "isolation_source:mucus",
+      "value": "mucus",
+      "label": "Mucus"
+    },
+    {
+      "id": "isolation_source:mud-sludge",
+      "value": "mud-sludge",
+      "label": "Mud-Sludge"
+    },
+    {
+      "id": "isolation_source:mushroom",
+      "value": "mushroom",
+      "label": "Mushroom"
+    },
+    {
+      "id": "isolation_source:mycorrhiza",
+      "value": "mycorrhiza",
+      "label": "Mycorrhiza"
+    },
+    {
+      "id": "isolation_source:mycosis",
+      "value": "mycosis",
+      "label": "Mycosis"
+    },
+    {
+      "id": "isolation_source:nectar",
+      "value": "nectar",
+      "label": "Nectar"
+    },
+    {
+      "id": "isolation_source:nematoda",
+      "value": "nematoda",
+      "label": "Nematoda"
+    },
+    {
+      "id": "isolation_source:nephridium",
+      "value": "nephridium",
+      "label": "Nephridium"
+    },
+    {
+      "id": "isolation_source:nose",
+      "value": "nose",
+      "label": "Nose"
+    },
+    {
+      "id": "isolation_source:oil-fuel",
+      "value": "oil-fuel",
+      "label": "Oil-Fuel"
+    },
+    {
+      "id": "isolation_source:oil-reservoir",
+      "value": "oil-reservoir",
+      "label": "Oil-reservoir"
+    },
+    {
+      "id": "isolation_source:other",
+      "value": "other",
+      "label": "Other"
+    },
+    {
+      "id": "isolation_source:ovary",
+      "value": "ovary",
+      "label": "Ovary"
+    },
+    {
+      "id": "isolation_source:paddy-ricefield",
+      "value": "paddy-ricefield",
+      "label": "Paddy-Ricefield"
+    },
+    {
+      "id": "isolation_source:painting",
+      "value": "painting",
+      "label": "Painting"
+    },
+    {
+      "id": "isolation_source:parasite",
+      "value": "parasite",
+      "label": "Parasite"
+    },
+    {
+      "id": "isolation_source:peat-moss",
+      "value": "peat-moss",
+      "label": "Peat-moss"
+    },
+    {
+      "id": "isolation_source:periodontal-pocket",
+      "value": "periodontal-pocket",
+      "label": "Periodontal-pocket"
+    },
+    {
+      "id": "isolation_source:permafrost",
+      "value": "permafrost",
+      "label": "Permafrost"
+    },
+    {
+      "id": "isolation_source:pesticide",
+      "value": "pesticide",
+      "label": "Pesticide"
+    },
+    {
+      "id": "isolation_source:phlegm",
+      "value": "phlegm",
+      "label": "Phlegm"
+    },
+    {
+      "id": "isolation_source:phylloplane",
+      "value": "phylloplane",
+      "label": "Phylloplane"
+    },
+    {
+      "id": "isolation_source:plaque",
+      "value": "plaque",
+      "label": "Plaque"
+    },
+    {
+      "id": "isolation_source:pleural-fluid",
+      "value": "pleural-fluid",
+      "label": "Pleural-fluid"
+    },
+    {
+      "id": "isolation_source:polar",
+      "value": "polar",
+      "label": "Polar"
+    },
+    {
+      "id": "isolation_source:pond-small",
+      "value": "pond-small",
+      "label": "Pond-small"
+    },
+    {
+      "id": "isolation_source:porifera-sponges",
+      "value": "porifera-sponges",
+      "label": "Porifera-Sponges"
+    },
+    {
+      "id": "isolation_source:post-mortem",
+      "value": "post-mortem",
+      "label": "Post-mortem"
+    },
+    {
+      "id": "isolation_source:preserved",
+      "value": "preserved",
+      "label": "Preserved"
+    },
+    {
+      "id": "isolation_source:primates",
+      "value": "primates",
+      "label": "Primates"
+    },
+    {
+      "id": "isolation_source:protist",
+      "value": "protist",
+      "label": "Protist"
+    },
+    {
+      "id": "isolation_source:protozoa",
+      "value": "protozoa",
+      "label": "Protozoa"
+    },
+    {
+      "id": "isolation_source:psychrophilic-<10\u00b0c",
+      "value": "psychrophilic-<10\u00b0c",
+      "label": "Psychrophilic-<10\u00b0C"
+    },
+    {
+      "id": "isolation_source:rectum",
+      "value": "rectum",
+      "label": "Rectum"
+    },
+    {
+      "id": "isolation_source:red-algae",
+      "value": "red-algae",
+      "label": "Red-algae"
+    },
+    {
+      "id": "isolation_source:reptilia",
+      "value": "reptilia",
+      "label": "Reptilia"
+    },
+    {
+      "id": "isolation_source:rhizoplane",
+      "value": "rhizoplane",
+      "label": "Rhizoplane"
+    },
+    {
+      "id": "isolation_source:rhizosphere",
+      "value": "rhizosphere",
+      "label": "Rhizosphere"
+    },
+    {
+      "id": "isolation_source:rodentia-other",
+      "value": "rodentia-other",
+      "label": "Rodentia-Other"
+    },
+    {
+      "id": "isolation_source:rumen",
+      "value": "rumen",
+      "label": "Rumen"
+    },
+    {
+      "id": "isolation_source:rumen-fluid",
+      "value": "rumen-fluid",
+      "label": "Rumen-fluid"
+    },
+    {
+      "id": "isolation_source:saline",
+      "value": "saline",
+      "label": "Saline"
+    },
+    {
+      "id": "isolation_source:saliva",
+      "value": "saliva",
+      "label": "Saliva"
+    },
+    {
+      "id": "isolation_source:salmonidae",
+      "value": "salmonidae",
+      "label": "Salmonidae"
+    },
+    {
+      "id": "isolation_source:salt-marsh",
+      "value": "salt-marsh",
+      "label": "Salt-marsh"
+    },
+    {
+      "id": "isolation_source:sandy",
+      "value": "sandy",
+      "label": "Sandy"
+    },
+    {
+      "id": "isolation_source:semen",
+      "value": "semen",
+      "label": "Semen"
+    },
+    {
+      "id": "isolation_source:semiarid",
+      "value": "semiarid",
+      "label": "Semiarid"
+    },
+    {
+      "id": "isolation_source:sewage-sludge",
+      "value": "sewage-sludge",
+      "label": "Sewage-sludge"
+    },
+    {
+      "id": "isolation_source:shrub-scrub",
+      "value": "shrub-scrub",
+      "label": "Shrub-Scrub"
+    },
+    {
+      "id": "isolation_source:simulated-communities",
+      "value": "simulated-communities",
+      "label": "Simulated-communities"
+    },
+    {
+      "id": "isolation_source:solid-waste",
+      "value": "solid-waste",
+      "label": "Solid-waste"
+    },
+    {
+      "id": "isolation_source:specimen",
+      "value": "specimen",
+      "label": "Specimen"
+    },
+    {
+      "id": "isolation_source:spinal-cord",
+      "value": "spinal-cord",
+      "label": "Spinal-Cord"
+    },
+    {
+      "id": "isolation_source:spleen",
+      "value": "spleen",
+      "label": "Spleen"
+    },
+    {
+      "id": "isolation_source:spoiled",
+      "value": "spoiled",
+      "label": "Spoiled"
+    },
+    {
+      "id": "isolation_source:spring",
+      "value": "spring",
+      "label": "Spring"
+    },
+    {
+      "id": "isolation_source:stem-branch",
+      "value": "stem-branch",
+      "label": "Stem-Branch"
+    },
+    {
+      "id": "isolation_source:sterilized-desinfected",
+      "value": "sterilized-desinfected",
+      "label": "Sterilized-Desinfected"
+    },
+    {
+      "id": "isolation_source:stomach",
+      "value": "stomach",
+      "label": "Stomach"
+    },
+    {
+      "id": "isolation_source:straw",
+      "value": "straw",
+      "label": "Straw"
+    },
+    {
+      "id": "isolation_source:subgingival-plaque",
+      "value": "subgingival-plaque",
+      "label": "Subgingival-plaque"
+    },
+    {
+      "id": "isolation_source:sulfuric",
+      "value": "sulfuric",
+      "label": "Sulfuric"
+    },
+    {
+      "id": "isolation_source:surface-swab",
+      "value": "surface-swab",
+      "label": "Surface-swab"
+    },
+    {
+      "id": "isolation_source:swab",
+      "value": "swab",
+      "label": "Swab"
+    },
+    {
+      "id": "isolation_source:synovial-fluid",
+      "value": "synovial-fluid",
+      "label": "Synovial-fluid"
+    },
+    {
+      "id": "isolation_source:thermal-spring",
+      "value": "thermal-spring",
+      "label": "Thermal-spring"
+    },
+    {
+      "id": "isolation_source:thermophilic->45\u00b0c",
+      "value": "thermophilic->45\u00b0c",
+      "label": "Thermophilic->45\u00b0C"
+    },
+    {
+      "id": "isolation_source:thoracic-segment",
+      "value": "thoracic-segment",
+      "label": "Thoracic-segment"
+    },
+    {
+      "id": "isolation_source:throat",
+      "value": "throat",
+      "label": "Throat"
+    },
+    {
+      "id": "isolation_source:tick",
+      "value": "tick",
+      "label": "Tick"
+    },
+    {
+      "id": "isolation_source:timber",
+      "value": "timber",
+      "label": "Timber"
+    },
+    {
+      "id": "isolation_source:tooth",
+      "value": "tooth",
+      "label": "Tooth"
+    },
+    {
+      "id": "isolation_source:torso",
+      "value": "torso",
+      "label": "Torso"
+    },
+    {
+      "id": "isolation_source:trachea",
+      "value": "trachea",
+      "label": "Trachea"
+    },
+    {
+      "id": "isolation_source:transportation-ways-roads",
+      "value": "transportation-ways-roads",
+      "label": "Transportation-ways-Roads"
+    },
+    {
+      "id": "isolation_source:treatment",
+      "value": "treatment",
+      "label": "Treatment"
+    },
+    {
+      "id": "isolation_source:tree",
+      "value": "tree",
+      "label": "Tree"
+    },
+    {
+      "id": "isolation_source:tuberculosis",
+      "value": "tuberculosis",
+      "label": "Tuberculosis"
+    },
+    {
+      "id": "isolation_source:urethra",
+      "value": "urethra",
+      "label": "Urethra"
+    },
+    {
+      "id": "isolation_source:urogenital-tract",
+      "value": "urogenital-tract",
+      "label": "Urogenital-tract"
+    },
+    {
+      "id": "isolation_source:vagina",
+      "value": "vagina",
+      "label": "Vagina"
+    },
+    {
+      "id": "isolation_source:vaginal-secretion",
+      "value": "vaginal-secretion",
+      "label": "Vaginal-secretion"
+    },
+    {
+      "id": "isolation_source:vascular-system",
+      "value": "vascular-system",
+      "label": "Vascular-system"
+    },
+    {
+      "id": "isolation_source:vineyard",
+      "value": "vineyard",
+      "label": "Vineyard"
+    },
+    {
+      "id": "isolation_source:viriome",
+      "value": "viriome",
+      "label": "Viriome"
+    },
+    {
+      "id": "isolation_source:vomit",
+      "value": "vomit",
+      "label": "Vomit"
+    },
+    {
+      "id": "isolation_source:waste",
+      "value": "waste",
+      "label": "Waste"
+    },
+    {
+      "id": "isolation_source:waste-gas",
+      "value": "waste-gas",
+      "label": "Waste-gas"
+    },
+    {
+      "id": "isolation_source:wilt",
+      "value": "wilt",
+      "label": "Wilt"
+    },
+    {
+      "id": "isolation_source:xerophilic",
+      "value": "xerophilic",
+      "label": "Xerophilic"
+    },
+    {
+      "id": "isolation_source:xerophytic",
+      "value": "xerophytic",
+      "label": "Xerophytic"
+    },
+    {
+      "id": "isolation_source:yeast",
+      "value": "yeast",
+      "label": "Yeast"
+    },
+    {
+      "id": "isolation_source:zooplankton",
+      "value": "zooplankton",
+      "label": "Zooplankton"
+    }
+  ]
+}

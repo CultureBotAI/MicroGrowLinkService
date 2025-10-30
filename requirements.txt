@@ -1,0 +1,12 @@
+# Web Interface
+gradio>=4.0.0
+
+# Data Processing (for reading prediction results)
+pandas>=2.2.3
+
+# Database for querying knowledge graph
+duckdb>=0.10.0
+
+# Note: Deep learning dependencies (torch, torch-geometric, etc.) are NOT needed
+# because this service calls MicroGrowLink's prediction script via subprocess.
+# The prediction script runs in MicroGrowLink's environment with its own dependencies.

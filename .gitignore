@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large data files (download from Google Drive)
+data/*.zip
+data/*.pt
+data/merged-kg_*.tsv
+
+# Model data files (should be downloaded)
+data/rgt/
+data/kogut/*.json
+data/kogut/*.tsv
+
+# Keep only the isolation source hierarchy
+!data/isolation_source_hierarchy.json
+
+# uv lock file (can be regenerated)
+# Commenting out to keep it for reproducibility
+# uv.lock
+
+# Temporary files
+*.tmp
+*.log
+.cache/
