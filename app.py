@@ -217,7 +217,21 @@ def create_interface():
     }
 
     /* Trait profile inputs - very light orange background with bold black text */
-    .trait-input label {
+    .trait-input label,
+    .trait-input label span,
+    .trait-input .label-wrap span {
+        color: white !important;
+        background-color: #1e3a8a !important;
+        font-weight: bold !important;
+        padding: 6px 12px !important;
+        border-radius: 6px !important;
+        display: inline-block !important;
+        margin-bottom: 8px !important;
+    }
+
+    /* Additional selector for Gradio label text */
+    .left-column label,
+    .left-column label span {
         color: white !important;
         background-color: #1e3a8a !important;
         font-weight: bold !important;
