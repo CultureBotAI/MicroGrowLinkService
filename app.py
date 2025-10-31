@@ -218,7 +218,7 @@ def create_interface():
 
     /* Trait profile inputs - very light orange background with bold black text */
     .trait-input label {
-        color: #f3f4f6 !important;
+        color: #3b82f6 !important;
         font-weight: bold !important;
     }
 
