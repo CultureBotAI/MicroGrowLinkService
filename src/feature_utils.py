@@ -9,43 +9,51 @@ import json
 import config
 
 
-def build_feature_string(temperature: str = None,
+def build_feature_string(temp_opt: str = None,
                          oxygen: str = None,
-                         gram_stain: str = None,
-                         cell_shape: str = None,
-                         motility: str = None,
-                         sporulation: str = None,
+                         ph_opt: str = None,
+                         nacl_opt: str = None,
+                         energy_metabolism: str = None,
+                         carbon_cycling: str = None,
+                         nitrogen_cycling: str = None,
+                         sulfur_metal_cycling: str = None,
                          isolation_source: str = None) -> str:
     """
     Build feature string from dropdown selections.
 
     Args:
-        temperature: Temperature preference
+        temp_opt: Optimal temperature preference
         oxygen: Oxygen requirement
-        gram_stain: Gram stain result
-        cell_shape: Cell morphology
-        motility: Motility status
-        sporulation: Sporulation capability
+        ph_opt: Optimal pH preference
+        nacl_opt: Optimal NaCl/salinity preference
+        energy_metabolism: Energy metabolism pathway
+        carbon_cycling: Carbon cycling pathway
+        nitrogen_cycling: Nitrogen cycling pathway
+        sulfur_metal_cycling: Sulfur/metal cycling pathway
         isolation_source: Isolation source value
 
     Returns:
-        Comma-separated feature string (e.g., "temperature:mesophilic,oxygen:aerobe")
+        Comma-separated feature string (e.g., "temp_opt:mid2,oxygen:aerobe,pathways:nitrogen_fixation")
     """
     features = []
 
     # Skip None and 'unknown' values
-    if temperature and temperature != "unknown":
-        features.append(f"temperature:{temperature}")
+    if temp_opt and temp_opt != "unknown":
+        features.append(f"temp_opt:{temp_opt}")
     if oxygen and oxygen != "unknown":
         features.append(f"oxygen:{oxygen}")
-    if gram_stain and gram_stain != "unknown":
-        features.append(f"gram_stain:{gram_stain}")
-    if cell_shape and cell_shape != "unknown":
-        features.append(f"cell_shape:{cell_shape}")
-    if motility and motility != "unknown":
-        features.append(f"motility:{motility}")
-    if sporulation and sporulation != "unknown":
-        features.append(f"sporulation:{sporulation}")
+    if ph_opt and ph_opt != "unknown":
+        features.append(f"pH_opt:{ph_opt}")
+    if nacl_opt and nacl_opt != "unknown":
+        features.append(f"NaCl_opt:{nacl_opt}")
+    if energy_metabolism and energy_metabolism != "unknown":
+        features.append(f"pathways:{energy_metabolism}")
+    if carbon_cycling and carbon_cycling != "unknown":
+        features.append(f"pathways:{carbon_cycling}")
+    if nitrogen_cycling and nitrogen_cycling != "unknown":
+        features.append(f"pathways:{nitrogen_cycling}")
+    if sulfur_metal_cycling and sulfur_metal_cycling != "unknown":
+        features.append(f"pathways:{sulfur_metal_cycling}")
     if isolation_source and isolation_source != "unknown":
         features.append(f"isolation_source:{isolation_source}")
 

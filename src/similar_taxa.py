@@ -168,8 +168,7 @@ def find_similar_taxa(features_dict: Dict[str, str],
             lambda p: ', '.join([f"{k}:{v}" for k, v in p.items()])
         )
 
-        # Drop the profile dict column
-        similarities_df = similarities_df.drop('profile', axis=1)
+        # Keep the profile dict column - it's needed in format_similar_taxa_for_display()
 
         return similarities_df
 
@@ -239,8 +238,8 @@ def format_similar_taxa_for_display(similar_taxa_df: pd.DataFrame) -> pd.DataFra
     """
     if similar_taxa_df.empty:
         return pd.DataFrame(columns=[
-            'Taxon', 'Taxon Label', 'Isolation Source', 'Traits Matched', 'Traits Matched %',
-            'Trait Profile', 'Media Count', 'Media (sample)'
+            'Taxon', 'Similarity', 'Media', 'Taxon Label', 'Isolation Source', 'Traits Matched %',
+            'Trait Profile'
         ])
 
     display_df = similar_taxa_df.copy()
@@ -264,20 +263,22 @@ def format_similar_taxa_for_display(similar_taxa_df: pd.DataFrame) -> pd.DataFra
 
     # Format columns
     display_df['Taxon'] = display_df['taxon']
-    display_df['Taxon Label'] = display_df['taxon'].map(lambda x: labels.get(x, ''))
-    display_df['Isolation Source'] = display_df['profile'].apply(extract_isolation_source)
-    display_df['Traits Matched'] = display_df['traits_matched'].astype(int)
-    display_df['Traits Matched %'] = display_df['traits_matched_pct'].round(1).astype(str) + '%'
-    display_df['Trait Profile'] = display_df['trait_profile']
-    display_df['Media Count'] = display_df['media'].apply(len)
-    display_df['Media (sample)'] = display_df['media'].apply(
+    display_df['Similarity'] = (display_df['similarity'] * 100).round(1).astype(str) + '%'
+    display_df['Media'] = display_df['media'].apply(
         lambda media_list: ', '.join([f"{m} ({labels.get(m, '')})" for m in media_list[:5]]) if len(media_list) > 0 else 'None'
     )
+    display_df['Taxon Label'] = display_df['taxon'].map(lambda x: labels.get(x, ''))
+    display_df['Isolation Source'] = display_df['profile'].apply(extract_isolation_source)
+    display_df['Traits Matched %'] = display_df['traits_matched_pct'].round(1).astype(str) + '%'
+    display_df['Trait Profile'] = display_df['trait_profile']
+
+    # Sort by similarity (highest to lowest) to ensure proper display order
+    display_df = display_df.sort_values('similarity', ascending=False)
 
     # Select columns for display
     display_columns = [
-        'Taxon', 'Taxon Label', 'Isolation Source', 'Traits Matched', 'Traits Matched %',
-        'Trait Profile', 'Media Count', 'Media (sample)'
+        'Taxon', 'Similarity', 'Media', 'Taxon Label', 'Isolation Source', 'Traits Matched %',
+        'Trait Profile'
     ]
 
     return display_df[display_columns]

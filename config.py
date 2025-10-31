@@ -25,11 +25,14 @@ DEFAULT_HIDDEN_DIM = 64  # KOGUT model's hidden dimension (verified from checkpo
 
 # Feature categories and valid values
 FEATURE_CATEGORIES = {
-    "temperature": [
-        "mesophilic",
-        "thermophilic",
-        "psychrophilic",
-        "hyperthermophilic"
+    "temp_opt": [
+        "very_low",
+        "low",
+        "mid1",
+        "mid2",
+        "mid3",
+        "mid4",
+        "high"
     ],
     "oxygen": [
         "aerobe",
@@ -42,37 +45,64 @@ FEATURE_CATEGORIES = {
         "obligate_anaerobe",
         "aerotolerant"
     ],
-    "gram_stain": [
-        "positive",
-        "negative",
-        "variable"
+    "pH_opt": [
+        "low",
+        "mid1",
+        "mid2",
+        "high"
     ],
-    "cell_shape": [
-        "rod",
-        "coccus",
-        "bacillus",
-        "spiral",
-        "spirochete",
-        "filament",
-        "vibrio",
-        "coccobacillus",
-        "diplococcus",
-        "oval",
-        "ovoid",
-        "sphere",
-        "curved",
-        "helical",
-        "pleomorphic",
-        "fusiform",
-        "spindle"
+    "NaCl_opt": [
+        "very_low",
+        "low",
+        "mid",
+        "high"
     ],
-    "motility": [
-        "motile",
-        "non_motile"
+    "energy_metabolism": [
+        "aerobic_anoxygenic_phototrophy",
+        "aerobic_chemo_heterotrophy",
+        "aerobic_heterotrophy",
+        "anoxygenic_photoautotrophy",
+        "anoxygenic_photoautotrophy_hydrogen_oxidation",
+        "anoxygenic_photoautotrophy_iron_oxidation",
+        "anoxygenic_photoautotrophy_sulfur_oxidation",
+        "autotrophy",
+        "fermentation",
+        "heterotrophic",
+        "photoautotrophy",
+        "photoheterotrophy"
     ],
-    "sporulation": [
-        "spore_forming",
-        "non_spore_forming"
+    "carbon_cycling": [
+        "aliphatic_non_methane_hydrocarbon_degradation",
+        "aminoacid_degradation",
+        "aromatic_compound_degradation",
+        "aromatic_hydrocarbon_degradation",
+        "carbon_monoxide_oxidation",
+        "cellobiose_degradation",
+        "cellulose_degradation",
+        "chitin_degradation",
+        "chlorocarbon_degradation",
+        "hydrocarbon_degradation",
+        "methane_oxidation",
+        "methanol_oxidation"
+    ],
+    "nitrogen_cycling": [
+        "annamox",
+        "denitrification",
+        "nitrate_reduction_to_ammonia",
+        "nitrification",
+        "nitrite_reduction_to_ammonia",
+        "nitrogen_fixation"
+    ],
+    "sulfur_metal_cycling": [
+        "arsenate_reduction",
+        "arsenite_oxidation",
+        "iron_oxidation",
+        "iron_reduction",
+        "manganese_oxidation",
+        "manganese_reduction",
+        "sulfide_oxidation",
+        "sulfur_oxidation",
+        "sulfur_reduction"
     ]
 }
 

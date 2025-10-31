@@ -53,18 +53,20 @@ def initialize_predictor(device="cpu"):
         return False, f"Failed to initialize predictor: {str(e)}"
 
 
-def predict_media(temperature, oxygen, gram_stain, cell_shape, motility, sporulation,
-                  isolation_source, topk, similar_taxa_threshold, device, hidden_dim):
+def predict_media(temp_opt, oxygen, ph_opt, nacl_opt, energy_metabolism, carbon_cycling,
+                  nitrogen_cycling, sulfur_metal_cycling, isolation_source, topk, similar_taxa_threshold, device, hidden_dim):
     """
     Main prediction function called by Gradio interface.
 
     Args:
-        temperature: Temperature preference
+        temp_opt: Optimal temperature
         oxygen: Oxygen requirement
-        gram_stain: Gram stain result
-        cell_shape: Cell morphology
-        motility: Motility status
-        sporulation: Sporulation capability
+        ph_opt: Optimal pH
+        nacl_opt: Optimal NaCl/salinity
+        energy_metabolism: Energy metabolism pathway
+        carbon_cycling: Carbon cycling pathway
+        nitrogen_cycling: Nitrogen cycling pathway
+        sulfur_metal_cycling: Sulfur/metal cycling pathway
         isolation_source: Isolation source
         topk: Number of predictions
         similar_taxa_threshold: Minimum % of traits that must be matched in similar taxa
@@ -85,12 +87,14 @@ def predict_media(temperature, oxygen, gram_stain, cell_shape, motility, sporula
 
         # Build feature string
         feature_string = build_feature_string(
-            temperature=temperature,
+            temp_opt=temp_opt,
             oxygen=oxygen,
-            gram_stain=gram_stain,
-            cell_shape=cell_shape,
-            motility=motility,
-            sporulation=sporulation,
+            ph_opt=ph_opt,
+            nacl_opt=nacl_opt,
+            energy_metabolism=energy_metabolism,
+            carbon_cycling=carbon_cycling,
+            nitrogen_cycling=nitrogen_cycling,
+            sulfur_metal_cycling=sulfur_metal_cycling,
             isolation_source=isolation_source
         )
 
@@ -171,6 +175,16 @@ def create_interface():
 
     # Custom CSS for additional styling
     custom_css = """
+    /* White divider between left and right columns */
+    .main-row > .left-column {
+        border-right: 2px solid white !important;
+        padding-right: 20px !important;
+    }
+
+    .main-row > .right-column {
+        padding-left: 20px !important;
+    }
+
     /* Results tables - dark gray background */
     .results-table {
         background-color: #374151 !important;
@@ -202,27 +216,53 @@ def create_interface():
         border-color: #6b7280 !important;
     }
 
-    /* Trait profile inputs - black and dark gray */
+    /* Trait profile inputs - very light orange background with bold black text */
     .trait-input label {
         color: #f3f4f6 !important;
+        font-weight: bold !important;
     }
 
     .trait-input .wrap {
-        background-color: #1f2937 !important;
-        border-color: #4b5563 !important;
+        background-color: #ffd9b3 !important;
+        border-color: #ffb366 !important;
         border-radius: 8px !important;
     }
 
     .trait-input input,
     .trait-input select,
     .trait-input .dropdown {
-        background-color: #111827 !important;
-        border-color: #4b5563 !important;
-        color: #e5e7eb !important;
+        background-color: #ffd9b3 !important;
+        border-color: #ffb366 !important;
+        color: #000000 !important;
+        font-weight: bold !important;
     }
 
     .trait-input .dropdown-arrow {
-        color: #9ca3af !important;
+        color: #000000 !important;
+    }
+
+    /* Dropdown menu options - very light orange background */
+    .trait-input option {
+        background-color: #ffd9b3 !important;
+        color: #000000 !important;
+        font-weight: bold !important;
+    }
+
+    /* Dropdown menu container */
+    .trait-input .dropdown-menu {
+        background-color: #ffd9b3 !important;
+    }
+
+    .trait-input .dropdown-content {
+        background-color: #ffd9b3 !important;
+    }
+
+    /* Selected dropdown items */
+    .trait-input option:checked,
+    .trait-input option:hover {
+        background-color: #ffb366 !important;
+        color: #000000 !important;
+        font-weight: bold !important;
     }
     """
 
@@ -231,13 +271,93 @@ def create_interface():
         gr.Markdown(f"# {config.APP_TITLE}")
         gr.Markdown(config.APP_DESCRIPTION)
 
-        with gr.Row():
-            with gr.Column(scale=1):
+        with gr.Row(elem_classes=["main-row"]):
+            with gr.Column(scale=1, elem_classes=["left-column"]):
                 gr.Markdown("## Microbial Traits")
                 gr.Markdown("Select characteristics of the microorganism:")
 
-                # Create feature inputs
-                feature_inputs = create_feature_inputs()
+                # Create feature inputs dictionary
+                feature_inputs = {}
+
+                # Layout in 4×3 grid
+                with gr.Row():
+                    feature_inputs['temp_opt'] = gr.Dropdown(
+                        choices=[None, "unknown"] + config.FEATURE_CATEGORIES['temp_opt'],
+                        value="unknown",
+                        label="Optimal Temperature",
+                        info="Select the organism's optimal temperature (very_low to high)",
+                        elem_classes=["trait-input"]
+                    )
+                    feature_inputs['oxygen'] = gr.Dropdown(
+                        choices=[None, "unknown"] + config.FEATURE_CATEGORIES['oxygen'],
+                        value="unknown",
+                        label="Oxygen Requirement",
+                        info="Select the organism's relationship with oxygen",
+                        elem_classes=["trait-input"]
+                    )
+                    feature_inputs['ph_opt'] = gr.Dropdown(
+                        choices=[None, "unknown"] + config.FEATURE_CATEGORIES['pH_opt'],
+                        value="unknown",
+                        label="Optimal pH",
+                        info="Select the optimal pH (low=acidophilic, high=alkaliphilic)",
+                        elem_classes=["trait-input"]
+                    )
+
+                with gr.Row():
+                    feature_inputs['nacl_opt'] = gr.Dropdown(
+                        choices=[None, "unknown"] + config.FEATURE_CATEGORIES['NaCl_opt'],
+                        value="unknown",
+                        label="Optimal NaCl",
+                        info="Select the optimal salinity/NaCl level",
+                        elem_classes=["trait-input"]
+                    )
+                    feature_inputs['energy_metabolism'] = gr.Dropdown(
+                        choices=[None, "unknown"] + config.FEATURE_CATEGORIES['energy_metabolism'],
+                        value="unknown",
+                        label="Energy Metabolism",
+                        info="Select energy metabolism pathway (phototrophy, chemotrophy, etc.)",
+                        elem_classes=["trait-input"]
+                    )
+                    feature_inputs['carbon_cycling'] = gr.Dropdown(
+                        choices=[None, "unknown"] + config.FEATURE_CATEGORIES['carbon_cycling'],
+                        value="unknown",
+                        label="Carbon Cycling",
+                        info="Select carbon cycling pathway (degradation, oxidation, etc.)",
+                        elem_classes=["trait-input"]
+                    )
+
+                with gr.Row():
+                    feature_inputs['nitrogen_cycling'] = gr.Dropdown(
+                        choices=[None, "unknown"] + config.FEATURE_CATEGORIES['nitrogen_cycling'],
+                        value="unknown",
+                        label="Nitrogen Cycling",
+                        info="Select nitrogen cycling pathway (fixation, nitrification, etc.)",
+                        elem_classes=["trait-input"]
+                    )
+                    feature_inputs['sulfur_metal_cycling'] = gr.Dropdown(
+                        choices=[None, "unknown"] + config.FEATURE_CATEGORIES['sulfur_metal_cycling'],
+                        value="unknown",
+                        label="Sulfur/Metal Cycling",
+                        info="Select sulfur/metal cycling pathway (oxidation, reduction, etc.)",
+                        elem_classes=["trait-input"]
+                    )
+                    isolation_themes = [None, "unknown"] + list(config.ISOLATION_SOURCE_HIERARCHY.keys())
+                    feature_inputs['isolation_source_theme'] = gr.Dropdown(
+                        choices=isolation_themes,
+                        value="unknown",
+                        label="Isolation Source - Category",
+                        info="Select the broad category of isolation source",
+                        elem_classes=["trait-input"]
+                    )
+
+                with gr.Row():
+                    feature_inputs['isolation_source'] = gr.Dropdown(
+                        choices=[None, "unknown"],
+                        value="unknown",
+                        label="Isolation Source - Specific",
+                        info="Select the specific isolation source (choose category first)",
+                        elem_classes=["trait-input"]
+                    )
 
                 # Wire up isolation source theme to update source dropdown
                 feature_inputs['isolation_source_theme'].change(
@@ -258,12 +378,15 @@ def create_interface():
                 gr.Examples(
                     examples=create_examples(),
                     inputs=[
-                        feature_inputs['temperature'],
+                        feature_inputs['temp_opt'],
                         feature_inputs['oxygen'],
-                        feature_inputs['gram_stain'],
-                        feature_inputs['cell_shape'],
-                        feature_inputs['motility'],
-                        feature_inputs['sporulation'],
+                        feature_inputs['ph_opt'],
+                        feature_inputs['nacl_opt'],
+                        feature_inputs['energy_metabolism'],
+                        feature_inputs['carbon_cycling'],
+                        feature_inputs['nitrogen_cycling'],
+                        feature_inputs['sulfur_metal_cycling'],
+                        feature_inputs['isolation_source_theme'],
                         feature_inputs['isolation_source'],
                         advanced_inputs['topk'],
                         advanced_inputs['similar_taxa_threshold'],
@@ -273,7 +396,16 @@ def create_interface():
                     label="Click an example to load it"
                 )
 
-            with gr.Column(scale=1):
+                # Example descriptions
+                gr.Markdown("""
+**Example Descriptions:**
+1. **Marine bacterium** - aerobic heterotrophy + chitin degradation
+2. **Arctic psychrophile** - aerobic chemo-heterotrophy + cellulose degradation
+3. **Hyperthermophilic anaerobe** - fermentation + nitrogen fixation + sulfur reduction
+4. **Extreme halophile** - aerobic heterotrophy + aromatic compound degradation
+                """)
+
+            with gr.Column(scale=1, elem_classes=["right-column"]):
                 gr.Markdown("## Prediction Results")
 
                 # Create output components
@@ -300,12 +432,14 @@ def create_interface():
         predict_btn.click(
             fn=predict_media,
             inputs=[
-                feature_inputs['temperature'],
+                feature_inputs['temp_opt'],
                 feature_inputs['oxygen'],
-                feature_inputs['gram_stain'],
-                feature_inputs['cell_shape'],
-                feature_inputs['motility'],
-                feature_inputs['sporulation'],
+                feature_inputs['ph_opt'],
+                feature_inputs['nacl_opt'],
+                feature_inputs['energy_metabolism'],
+                feature_inputs['carbon_cycling'],
+                feature_inputs['nitrogen_cycling'],
+                feature_inputs['sulfur_metal_cycling'],
                 feature_inputs['isolation_source'],
                 advanced_inputs['topk'],
                 advanced_inputs['similar_taxa_threshold'],

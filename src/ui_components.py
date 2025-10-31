@@ -51,21 +51,21 @@ def create_feature_inputs():
         elem_classes=["trait-input"]
     )
 
-    # Motility
-    components['motility'] = gr.Dropdown(
-        choices=[None, "unknown"] + config.FEATURE_CATEGORIES['motility'],
+    # pH range
+    components['ph_range'] = gr.Dropdown(
+        choices=[None, "unknown"] + config.FEATURE_CATEGORIES['pH_range'],
         value="unknown",
-        label="Motility",
-        info="Select the motility status",
+        label="pH Range",
+        info="Select the pH preference (low=acidophilic, mid=neutral, high=alkaliphilic)",
         elem_classes=["trait-input"]
     )
 
-    # Sporulation
-    components['sporulation'] = gr.Dropdown(
-        choices=[None, "unknown"] + config.FEATURE_CATEGORIES['sporulation'],
+    # NaCl range
+    components['nacl_range'] = gr.Dropdown(
+        choices=[None, "unknown"] + config.FEATURE_CATEGORIES['NaCl_range'],
         value="unknown",
-        label="Sporulation",
-        info="Select the sporulation capability",
+        label="NaCl Range",
+        info="Select the salinity/NaCl preference",
         elem_classes=["trait-input"]
     )
 
@@ -187,8 +187,8 @@ def create_output_components():
 
     # Similar taxa table (new)
     components['similar_taxa'] = gr.Dataframe(
-        headers=["Taxon", "Taxon Label", "Isolation Source", "Traits Matched", "Traits Matched %", "Trait Profile", "Media Count", "Media (sample)"],
-        label="Similar Taxa in KG-Microbe (with shared trait profiles and their media)",
+        headers=["Taxon", "Similarity", "Media", "Taxon Label", "Isolation Source", "Traits Matched %", "Trait Profile"],
+        label="Similar Taxa in KG-Microbe (sorted by similarity, highest to lowest)",
         interactive=False,
         wrap=True,
         elem_classes=["results-table"]
@@ -219,61 +219,73 @@ def create_examples():
         List of example input combinations
     """
     examples = [
-        # Example 1: NCBITaxon:287 (Pseudomonas aeruginosa) - grows on medium:514
+        # Example 1: NCBITaxon:372072 (Cohaesibacter gelatinilyticus) - marine bacterium, grows on medium:514 (Marine Broth)
         [
-            "mesophilic",           # temperature
-            "aerobe",               # oxygen
-            "negative",             # gram_stain
-            "rod",                  # cell_shape
-            "unknown",              # motility
-            "unknown",              # sporulation
-            "unknown",              # isolation_source
-            20,                     # topk
-            50,                     # similar_taxa_threshold
-            "cpu",                  # device
-            64                      # hidden_dim (KOGUT default)
+            "mid2",                      # temp_opt (mesophilic ~25-30°C)
+            "facultative_anaerobe",      # oxygen
+            "mid2",                      # pH_opt (neutral pH)
+            "low",                       # NaCl_opt (marine salinity)
+            "aerobic_heterotrophy",      # energy_metabolism
+            "chitin_degradation",        # carbon_cycling
+            "unknown",                   # nitrogen_cycling
+            "unknown",                   # sulfur_metal_cycling
+            "Environmental",             # isolation_source_theme
+            "marine",                    # isolation_source
+            20,                          # topk
+            50,                          # similar_taxa_threshold
+            "cpu",                       # device
+            64                           # hidden_dim (KOGUT default)
         ],
-        # Example 2: NCBITaxon:1931 (Streptomyces sp.) - grows on medium:65
+        # Example 2: Novel Arctic Psychrophile - cold-adapted aerobic bacterium
         [
-            "mesophilic",
-            "aerobe",
-            "unknown",
-            "unknown",
-            "unknown",
-            "unknown",
-            "unknown",
-            20,
-            50,
-            "cpu",
-            64
+            "very_low",                  # temp_opt (psychrophilic ~0-15°C)
+            "aerobe",                    # oxygen
+            "mid2",                      # pH_opt (neutral)
+            "very_low",                  # NaCl_opt (low salinity)
+            "aerobic_chemo_heterotrophy", # energy_metabolism
+            "cellulose_degradation",     # carbon_cycling
+            "unknown",                   # nitrogen_cycling
+            "unknown",                   # sulfur_metal_cycling
+            "Other",                     # isolation_source_theme
+            "glacier",                   # isolation_source
+            20,                          # topk
+            50,                          # similar_taxa_threshold
+            "cpu",                       # device
+            64                           # hidden_dim
         ],
-        # Example 3: NCBITaxon:1502 (Clostridium perfringens) - anaerobic spore-former
+        # Example 3: Novel Hyperthermophilic Anaerobe - extreme heat-loving organism from volcanic environments
         [
-            "mesophilic",
-            "anaerobe",
-            "unknown",
-            "rod",
-            "unknown",
-            "unknown",
-            "unknown",
-            20,
-            50,
-            "cpu",
-            64
+            "high",                      # temp_opt (hyperthermophilic ~80-100°C)
+            "anaerobe",                  # oxygen
+            "low",                       # pH_opt (acidophilic)
+            "mid",                       # NaCl_opt (moderate salinity)
+            "fermentation",              # energy_metabolism
+            "unknown",                   # carbon_cycling
+            "nitrogen_fixation",         # nitrogen_cycling
+            "sulfur_reduction",          # sulfur_metal_cycling
+            "Environmental",             # isolation_source_theme
+            "hydrothermal-vent",         # isolation_source
+            20,                          # topk
+            50,                          # similar_taxa_threshold
+            "cpu",                       # device
+            64                           # hidden_dim
         ],
-        # Example 4: NCBITaxon:459347 (Solibacillus cecembensis) - psychrophilic aerobe
+        # Example 4: Novel Extreme Halophile - salt-loving alkaliphile from saline environments
         [
-            "psychrophilic",
-            "aerobe",
-            "positive",
-            "rod",
-            "unknown",
-            "unknown",
-            "unknown",
-            20,
-            50,
-            "cpu",
-            64
+            "mid2",                      # temp_opt (mesophilic)
+            "aerobe",                    # oxygen
+            "high",                      # pH_opt (alkaliphilic)
+            "high",                      # NaCl_opt (high salinity)
+            "aerobic_heterotrophy",      # energy_metabolism
+            "aromatic_compound_degradation", # carbon_cycling
+            "unknown",                   # nitrogen_cycling
+            "unknown",                   # sulfur_metal_cycling
+            "Environmental",             # isolation_source_theme
+            "non-marine-saline-and-alkaline", # isolation_source
+            20,                          # topk
+            50,                          # similar_taxa_threshold
+            "cpu",                       # device
+            64                           # hidden_dim
         ]
     ]
 
@@ -323,11 +335,11 @@ def create_help_text():
 
 ## Example Profiles
 
-The example profiles are based on real taxa from KG-Microbe:
-- **Example 1**: NCBITaxon:287 (*Pseudomonas aeruginosa*) - grows on medium:514
-- **Example 2**: NCBITaxon:1931 (*Streptomyces* sp.) - grows on medium:65
-- **Example 3**: NCBITaxon:1502 (*Clostridium perfringens*) - anaerobic spore-former
-- **Example 4**: NCBITaxon:459347 (*Solibacillus cecembensis*) - psychrophilic aerobe
+The example profiles showcase diverse microbial niches:
+- **Example 1**: *Cohaesibacter gelatinilyticus* (NCBITaxon:372072) - Marine bacterium, grows on medium:514 (Marine Broth)
+- **Example 2**: Arctic Psychrophile - Novel cold-adapted aerobic bacterium from glacial environments
+- **Example 3**: Hyperthermophilic Anaerobe - Novel extreme heat-loving organism from hydrothermal vents
+- **Example 4**: Extreme Halophile - Novel salt-loving alkaliphile from saline/alkaline environments
 
 ## About the Model
 
