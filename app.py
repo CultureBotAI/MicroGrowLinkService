@@ -264,6 +264,19 @@ def create_interface():
         color: #000000 !important;
         font-weight: bold !important;
     }
+
+    /* Green predict button */
+    button.primary {
+        background: linear-gradient(to bottom right, #22c55e, #16a34a) !important;
+        border-color: #16a34a !important;
+        color: white !important;
+        font-weight: bold !important;
+    }
+
+    button.primary:hover {
+        background: linear-gradient(to bottom right, #16a34a, #15803d) !important;
+        border-color: #15803d !important;
+    }
     """
 
     with gr.Blocks(title=config.APP_TITLE, theme=custom_theme, css=custom_css) as interface:
