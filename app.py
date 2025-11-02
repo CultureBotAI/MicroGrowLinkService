@@ -21,7 +21,7 @@ from src.feature_utils import (
 from src.predict import MicroGrowPredictor
 from src.similar_taxa import find_similar_taxa, format_similar_taxa_for_display
 from src.assess import assess_trait_profile_wrapper
-from src.taxon_lookup import lookup_taxon_traits, get_taxon_media
+from src.taxon_lookup import lookup_taxon_traits, get_taxon_media, find_isolation_source_theme
 from src.ui_components import (
     create_feature_inputs,
     create_advanced_inputs,
@@ -159,6 +159,13 @@ def lookup_taxon(taxon_id):
         sulfur_metal_cycling = traits_dict.get('sulfur_metal_cycling', 'unknown')
         isolation_source = traits_dict.get('isolation_source', 'unknown')
 
+        # Find the theme for the isolation source
+        isolation_source_theme = 'unknown'
+        if isolation_source != 'unknown':
+            theme = find_isolation_source_theme(isolation_source)
+            if theme:
+                isolation_source_theme = theme
+
         # Create success message
         trait_count = len([v for v in traits_dict.values() if v != 'unknown'])
         status_msg = f"""
@@ -172,11 +179,11 @@ The trait dropdowns below have been auto-populated. You can now click **Predict*
 """
 
         return [temp_opt, oxygen, ph_opt, nacl_opt, energy_metabolism, carbon_cycling,
-                nitrogen_cycling, sulfur_metal_cycling, isolation_source, status_msg]
+                nitrogen_cycling, sulfur_metal_cycling, isolation_source_theme, isolation_source, status_msg]
 
     except Exception as e:
         error_msg = f"❌ Error looking up taxon: {str(e)}"
-        return ["unknown"] * 8 + [error_msg]
+        return ["unknown"] * 9 + [error_msg]
 
 
 def predict_media(temp_opt, oxygen, ph_opt, nacl_opt, energy_metabolism, carbon_cycling,
@@ -603,13 +610,15 @@ Enter a taxon ID to automatically populate the trait fields below with data from
                 # Validation message
                 validation_output = output_components['validation']
 
-                # Assessment summary
-                assessment_summary_output = output_components['assessment_summary']
+                # Assessment results (in accordion)
+                with gr.Accordion("📊 Trait Profile Assessment", open=True):
+                    # Assessment summary
+                    assessment_summary_output = output_components['assessment_summary']
 
-                # Assessment details (collapsed by default)
-                with gr.Accordion("📊 Detailed Assessment Report", open=False):
-                    assessment_details_output = output_components['assessment_details']
-                    feature_importance_output = output_components['feature_importance']
+                    # Assessment details (collapsed by default)
+                    with gr.Accordion("📊 Detailed Assessment Metrics", open=False):
+                        assessment_details_output = output_components['assessment_details']
+                        feature_importance_output = output_components['feature_importance']
 
                 # Predictions table
                 predictions_output = output_components['predictions']
@@ -638,6 +647,7 @@ Enter a taxon ID to automatically populate the trait fields below with data from
                 feature_inputs['carbon_cycling'],
                 feature_inputs['nitrogen_cycling'],
                 feature_inputs['sulfur_metal_cycling'],
+                feature_inputs['isolation_source_theme'],
                 feature_inputs['isolation_source'],
                 lookup_status_output
             ]

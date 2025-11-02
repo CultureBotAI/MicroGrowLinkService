@@ -6,8 +6,25 @@ Retrieves traits for NCBITaxon IDs or BacDive strain IDs.
 import duckdb
 import pandas as pd
 from pathlib import Path
-from typing import Dict, Tuple, Optional
+from typing import Dict, Tuple, Optional, List
 import config
+
+
+def find_isolation_source_theme(isolation_source: str) -> Optional[str]:
+    """
+    Find the theme for a given isolation source value.
+
+    Args:
+        isolation_source: Specific isolation source value
+
+    Returns:
+        Theme name if found, None otherwise
+    """
+    for theme, sources in config.ISOLATION_SOURCE_HIERARCHY.items():
+        for source_item in sources:
+            if source_item.get('value') == isolation_source:
+                return theme
+    return None
 
 
 def lookup_taxon_traits(taxon_id: str,
