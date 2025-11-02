@@ -23,6 +23,15 @@ DEFAULT_DEVICE = "cpu"  # Use CPU for web server; change to "cuda" if GPU availa
 DEFAULT_TOPK = 20
 DEFAULT_HIDDEN_DIM = 64  # KOGUT model's hidden dimension (verified from checkpoint)
 
+# Knowledge Graph data for assessment
+KG_NODES_FILE = MICROGROWLINK_DIR / "data" / "merged-kg_nodes.tsv"
+KG_EDGES_FILE = MICROGROWLINK_DIR / "data" / "merged-kg_edges.tsv"
+
+# Assessment configuration
+MIN_MATCHING_TAXA = 10  # Minimum matching taxa required for reliable statistics
+ASSESSMENT_SIGNIFICANCE_LEVEL = 0.05  # Alpha level for statistical tests
+BOOTSTRAP_ITERATIONS = 1000  # Number of bootstrap samples for CI calculation
+
 # Feature categories and valid values
 FEATURE_CATEGORIES = {
     "temp_opt": [
@@ -160,5 +169,11 @@ def validate_paths():
         entity2id_path = DATA_PATH / "ultra" / "entity2id.txt"
         if not entity2id_path.exists():
             errors.append(f"entity2id.txt not found in {DATA_PATH / 'ultra'}")
+
+    # Check KG data files for assessment
+    if not KG_NODES_FILE.exists():
+        errors.append(f"KG nodes file not found: {KG_NODES_FILE}")
+    if not KG_EDGES_FILE.exists():
+        errors.append(f"KG edges file not found: {KG_EDGES_FILE}")
 
     return errors

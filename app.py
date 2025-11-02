@@ -20,9 +20,12 @@ from src.feature_utils import (
 )
 from src.predict import MicroGrowPredictor
 from src.similar_taxa import find_similar_taxa, format_similar_taxa_for_display
+from src.assess import assess_trait_profile_wrapper
+from src.taxon_lookup import lookup_taxon_traits, get_taxon_media
 from src.ui_components import (
     create_feature_inputs,
     create_advanced_inputs,
+    create_taxon_lookup_components,
     create_output_components,
     create_examples,
     create_help_text,
@@ -51,6 +54,129 @@ def initialize_predictor(device="cpu"):
 
     except Exception as e:
         return False, f"Failed to initialize predictor: {str(e)}"
+
+
+def assess_trait_profile(temp_opt, oxygen, ph_opt, nacl_opt, energy_metabolism, carbon_cycling,
+                          nitrogen_cycling, sulfur_metal_cycling, isolation_source):
+    """
+    Assess information content of the trait profile.
+
+    Args:
+        temp_opt: Optimal temperature
+        oxygen: Oxygen requirement
+        ph_opt: Optimal pH
+        nacl_opt: Optimal NaCl/salinity
+        energy_metabolism: Energy metabolism pathway
+        carbon_cycling: Carbon cycling pathway
+        nitrogen_cycling: Nitrogen cycling pathway
+        sulfur_metal_cycling: Sulfur/metal cycling pathway
+        isolation_source: Isolation source
+
+    Returns:
+        Tuple of (summary_html, detailed_df, feature_importance_df)
+    """
+    try:
+        # Build feature string
+        feature_string = build_feature_string(
+            temp_opt=temp_opt,
+            oxygen=oxygen,
+            ph_opt=ph_opt,
+            nacl_opt=nacl_opt,
+            energy_metabolism=energy_metabolism,
+            carbon_cycling=carbon_cycling,
+            nitrogen_cycling=nitrogen_cycling,
+            sulfur_metal_cycling=sulfur_metal_cycling,
+            isolation_source=isolation_source
+        )
+
+        # Check if any features provided
+        if not feature_string:
+            error_html = """
+<div style="border: 2px solid #ef4444; border-radius: 8px; padding: 16px; background-color: #fef2f2;">
+    <h3 style="color: #ef4444; margin-top: 0;">❌ No Features Selected</h3>
+    <p>Please select at least one microbial trait to assess.</p>
+</div>
+"""
+            return error_html, pd.DataFrame(), pd.DataFrame()
+
+        # Parse features
+        features_dict = parse_feature_string(feature_string)
+
+        # Run assessment
+        summary_html, details_df, importance_df, confidence = assess_trait_profile_wrapper(
+            features_dict,
+            config.KG_NODES_FILE,
+            config.KG_EDGES_FILE
+        )
+
+        return summary_html, details_df, importance_df
+
+    except Exception as e:
+        error_html = f"""
+<div style="border: 2px solid #ef4444; border-radius: 8px; padding: 16px; background-color: #fef2f2;">
+    <h3 style="color: #ef4444; margin-top: 0;">❌ Assessment Error</h3>
+    <p>Failed to assess trait profile: {str(e)}</p>
+</div>
+"""
+        return error_html, pd.DataFrame(), pd.DataFrame()
+
+
+def lookup_taxon(taxon_id):
+    """
+    Lookup traits for a given taxon ID and return values to populate trait dropdowns.
+
+    Args:
+        taxon_id: NCBITaxon ID or BacDive strain ID
+
+    Returns:
+        Tuple of (trait values for 8 dropdowns, status_message)
+    """
+    try:
+        if not taxon_id or not taxon_id.strip():
+            status_msg = "⚠️ Please enter a taxon ID."
+            # Return empty/unknown values for all traits
+            return ["unknown"] * 8 + [status_msg]
+
+        # Lookup traits
+        traits_dict, taxon_label, error_msg = lookup_taxon_traits(taxon_id.strip())
+
+        if error_msg:
+            status_msg = f"❌ {error_msg}"
+            return ["unknown"] * 8 + [status_msg]
+
+        # Get media for this taxon (for info purposes)
+        media_list = get_taxon_media(taxon_id.strip())
+        media_count = len(media_list)
+
+        # Map traits to dropdown values
+        temp_opt = traits_dict.get('temp_opt', 'unknown')
+        oxygen = traits_dict.get('oxygen', 'unknown')
+        ph_opt = traits_dict.get('pH_opt', 'unknown')
+        nacl_opt = traits_dict.get('NaCl_opt', 'unknown')
+        energy_metabolism = traits_dict.get('energy_metabolism', 'unknown')
+        carbon_cycling = traits_dict.get('carbon_cycling', 'unknown')
+        nitrogen_cycling = traits_dict.get('nitrogen_cycling', 'unknown')
+        sulfur_metal_cycling = traits_dict.get('sulfur_metal_cycling', 'unknown')
+        isolation_source = traits_dict.get('isolation_source', 'unknown')
+
+        # Create success message
+        trait_count = len([v for v in traits_dict.values() if v != 'unknown'])
+        status_msg = f"""
+✅ **Successfully loaded traits for: {taxon_label}**
+
+- **Taxon ID**: {taxon_id.strip()}
+- **Traits Found**: {trait_count} traits
+- **Known Media**: {media_count} media in KG-Microbe
+
+The trait dropdowns below have been auto-populated. You can now click **Predict** to see media recommendations.
+"""
+
+        return [temp_opt, oxygen, ph_opt, nacl_opt, energy_metabolism, carbon_cycling,
+                nitrogen_cycling, sulfur_metal_cycling, isolation_source, status_msg]
+
+    except Exception as e:
+        error_msg = f"❌ Error looking up taxon: {str(e)}"
+        return ["unknown"] * 8 + [error_msg]
 
 
 def predict_media(temp_opt, oxygen, ph_opt, nacl_opt, energy_metabolism, carbon_cycling,
@@ -284,6 +410,19 @@ def create_interface():
         font-weight: bold !important;
     }
 
+    /* Blue assess button */
+    button.secondary {
+        background: linear-gradient(to bottom right, #3b82f6, #2563eb) !important;
+        border-color: #2563eb !important;
+        color: white !important;
+        font-weight: bold !important;
+    }
+
+    button.secondary:hover {
+        background: linear-gradient(to bottom right, #2563eb, #1d4ed8) !important;
+        border-color: #1d4ed8 !important;
+    }
+
     /* Green predict button */
     button.primary {
         background: linear-gradient(to bottom right, #22c55e, #16a34a) !important;
@@ -302,6 +441,23 @@ def create_interface():
         # Header
         gr.Markdown(f"# {config.APP_TITLE}")
         gr.Markdown(config.APP_DESCRIPTION)
+
+        # Taxon Lookup Section (collapsible)
+        with gr.Accordion("🔍 Quick Lookup: Auto-populate traits from NCBITaxon or BacDive ID", open=False):
+            gr.Markdown("""
+Enter a taxon ID to automatically populate the trait fields below with data from the KG-Microbe knowledge graph.
+**Examples:** `NCBITaxon:372072`, `1234`, `bacdive.taxon:12345`
+            """)
+
+            taxon_lookup_components = create_taxon_lookup_components()
+
+            with gr.Row():
+                with gr.Column(scale=3):
+                    taxon_id_input = taxon_lookup_components['taxon_id']
+                with gr.Column(scale=1):
+                    lookup_btn = gr.Button("🔍 Lookup Taxon", variant="secondary", size="lg")
+
+            lookup_status_output = taxon_lookup_components['lookup_status']
 
         with gr.Row(elem_classes=["main-row"]):
             with gr.Column(scale=1, elem_classes=["left-column"]):
@@ -402,7 +558,8 @@ def create_interface():
                 with gr.Accordion("⚙ Advanced Options", open=False):
                     advanced_inputs = create_advanced_inputs()
 
-                # Predict button
+                # Assessment and Prediction buttons (stacked vertically)
+                assess_btn = gr.Button("📊 Assess Trait Profile", variant="secondary", size="lg")
                 predict_btn = gr.Button("🔬 Predict Growth Media", variant="primary", size="lg")
 
                 # Examples
@@ -446,6 +603,14 @@ def create_interface():
                 # Validation message
                 validation_output = output_components['validation']
 
+                # Assessment summary
+                assessment_summary_output = output_components['assessment_summary']
+
+                # Assessment details (collapsed by default)
+                with gr.Accordion("📊 Detailed Assessment Report", open=False):
+                    assessment_details_output = output_components['assessment_details']
+                    feature_importance_output = output_components['feature_importance']
+
                 # Predictions table
                 predictions_output = output_components['predictions']
 
@@ -459,6 +624,45 @@ def create_interface():
         # Help section
         with gr.Accordion("ℹ️ Help & Information", open=False):
             gr.Markdown(create_help_text())
+
+        # Wire up the lookup button
+        lookup_btn.click(
+            fn=lookup_taxon,
+            inputs=[taxon_id_input],
+            outputs=[
+                feature_inputs['temp_opt'],
+                feature_inputs['oxygen'],
+                feature_inputs['ph_opt'],
+                feature_inputs['nacl_opt'],
+                feature_inputs['energy_metabolism'],
+                feature_inputs['carbon_cycling'],
+                feature_inputs['nitrogen_cycling'],
+                feature_inputs['sulfur_metal_cycling'],
+                feature_inputs['isolation_source'],
+                lookup_status_output
+            ]
+        )
+
+        # Wire up the assess button
+        assess_btn.click(
+            fn=assess_trait_profile,
+            inputs=[
+                feature_inputs['temp_opt'],
+                feature_inputs['oxygen'],
+                feature_inputs['ph_opt'],
+                feature_inputs['nacl_opt'],
+                feature_inputs['energy_metabolism'],
+                feature_inputs['carbon_cycling'],
+                feature_inputs['nitrogen_cycling'],
+                feature_inputs['sulfur_metal_cycling'],
+                feature_inputs['isolation_source']
+            ],
+            outputs=[
+                assessment_summary_output,
+                assessment_details_output,
+                feature_importance_output
+            ]
+        )
 
         # Wire up the predict button
         predict_btn.click(

@@ -161,6 +161,31 @@ def create_advanced_inputs():
     return components
 
 
+def create_taxon_lookup_components():
+    """
+    Create Gradio input components for taxon lookup.
+
+    Returns:
+        Dictionary of Gradio components
+    """
+    components = {}
+
+    # Taxon ID input
+    components['taxon_id'] = gr.Textbox(
+        label="Taxon ID",
+        placeholder="Enter NCBITaxon ID (e.g., NCBITaxon:372072) or BacDive strain ID",
+        info="Lookup traits for a known taxon from KG-Microbe",
+        lines=1
+    )
+
+    # Lookup status message
+    components['lookup_status'] = gr.Markdown(
+        value="Enter a taxon ID and click **Lookup Taxon** to auto-populate traits."
+    )
+
+    return components
+
+
 def create_output_components():
     """
     Create Gradio output components.
@@ -174,6 +199,32 @@ def create_output_components():
     components['validation'] = gr.Markdown(
         label="Feature Validation",
         value="Select features and click **Predict** to see validation results."
+    )
+
+    # Assessment summary (HTML)
+    components['assessment_summary'] = gr.HTML(
+        label="Information Content Assessment",
+        value="Click <strong>Assess Trait Profile</strong> to evaluate trait quality."
+    )
+
+    # Detailed assessment metrics table
+    components['assessment_details'] = gr.Dataframe(
+        headers=["Category", "Metric", "Value"],
+        label="Detailed Assessment Metrics",
+        interactive=False,
+        wrap=True,
+        elem_classes=["results-table"],
+        visible=False
+    )
+
+    # Feature importance table
+    components['feature_importance'] = gr.Dataframe(
+        headers=["Rank", "Feature", "Importance Score", "P-value", "Significance"],
+        label="Feature Importance Rankings",
+        interactive=False,
+        wrap=True,
+        elem_classes=["results-table"],
+        visible=False
     )
 
     # Predictions table
