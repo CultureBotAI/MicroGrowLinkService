@@ -216,6 +216,32 @@ def assess_trait_profile_wrapper(features_dict: Dict[str, str],
     Returns:
         Tuple of (summary_html, detailed_df, feature_importance_df, confidence_level)
     """
+    # Check if assessment module is available
+    if not ASSESSMENT_AVAILABLE:
+        error_html = """
+<div style="border: 2px solid #f59e0b; border-radius: 8px; padding: 16px; background-color: #fffbeb;">
+    <h3 style="color: #f59e0b; margin-top: 0;">⚠️ Assessment Module Not Available</h3>
+    <p><strong>The Information Content Assessment feature requires additional dependencies from the MicroGrowLink repository.</strong></p>
+
+    <h4>Required Dependencies:</h4>
+    <ul>
+        <li><code>torch_geometric</code> - PyTorch Geometric library</li>
+        <li>Other MicroGrowLink dependencies</li>
+    </ul>
+
+    <h4>To enable assessment:</h4>
+    <ol>
+        <li>Ensure the MicroGrowLink repository is at: <code>../MicroGrowLink/</code></li>
+        <li>Install MicroGrowLink dependencies: <code>cd ../MicroGrowLink && uv sync</code></li>
+        <li>Verify the assessment module exists: <code>../MicroGrowLink/src/utils/information_content_assessment.py</code></li>
+    </ol>
+
+    <p><em>Note: You can still use the prediction feature without assessment. The assessment provides additional quality metrics but is not required for predictions.</em></p>
+</div>
+"""
+        empty_df = pd.DataFrame()
+        return error_html, empty_df, empty_df, "unavailable"
+
     try:
         assessor = TraitAssessor(nodes_file, edges_file)
         metrics = assessor.assess(features_dict)
