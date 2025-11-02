@@ -102,12 +102,17 @@ def assess_trait_profile(temp_opt, oxygen, ph_opt, nacl_opt, energy_metabolism, 
         # Parse features
         features_dict = parse_feature_string(feature_string)
 
+        # Debug: Print features being assessed
+        print(f"[ASSESSMENT] Assessing features: {features_dict}")
+
         # Run assessment
         summary_html, details_df, importance_df, confidence = assess_trait_profile_wrapper(
             features_dict,
             config.KG_NODES_FILE,
             config.KG_EDGES_FILE
         )
+
+        print(f"[ASSESSMENT] Result confidence: {confidence}")
 
         return summary_html, details_df, importance_df
 
@@ -610,8 +615,8 @@ Enter a taxon ID to automatically populate the trait fields below with data from
                 # Validation message
                 validation_output = output_components['validation']
 
-                # Assessment results (in accordion)
-                with gr.Accordion("📊 Trait Profile Assessment", open=True):
+                # Assessment results (in accordion - closed by default so loading is visible)
+                with gr.Accordion("📊 Trait Profile Assessment", open=False):
                     # Assessment summary
                     assessment_summary_output = output_components['assessment_summary']
 
