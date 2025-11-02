@@ -1,21 +1,16 @@
 """
 Information content assessment for trait profiles.
-Wrapper around MicroGrowLink's InformationContentAssessor.
+Wrapper around InformationContentAssessor (copied from MicroGrowLink).
 """
 
 from __future__ import annotations
 
-import sys
 from pathlib import Path
 from typing import Dict, Tuple, Optional
 import pandas as pd
 
-# Add MicroGrowLink to Python path
-MICROGROWLINK_DIR = Path(__file__).parent.parent.parent / "MicroGrowLink"
-sys.path.insert(0, str(MICROGROWLINK_DIR))
-
 try:
-    from src.utils.information_content_assessment import (
+    from src.information_content_assessment import (
         InformationContentAssessor,
         InformationContentMetrics
     )
@@ -219,24 +214,11 @@ def assess_trait_profile_wrapper(features_dict: Dict[str, str],
     # Check if assessment module is available
     if not ASSESSMENT_AVAILABLE:
         error_html = """
-<div style="border: 2px solid #f59e0b; border-radius: 8px; padding: 16px; background-color: #fffbeb;">
-    <h3 style="color: #f59e0b; margin-top: 0;">⚠️ Assessment Module Not Available</h3>
-    <p><strong>The Information Content Assessment feature requires additional dependencies from the MicroGrowLink repository.</strong></p>
-
-    <h4>Required Dependencies:</h4>
-    <ul>
-        <li><code>torch_geometric</code> - PyTorch Geometric library</li>
-        <li>Other MicroGrowLink dependencies</li>
-    </ul>
-
-    <h4>To enable assessment:</h4>
-    <ol>
-        <li>Ensure the MicroGrowLink repository is at: <code>../MicroGrowLink/</code></li>
-        <li>Install MicroGrowLink dependencies: <code>cd ../MicroGrowLink && uv sync</code></li>
-        <li>Verify the assessment module exists: <code>../MicroGrowLink/src/utils/information_content_assessment.py</code></li>
-    </ol>
-
-    <p><em>Note: You can still use the prediction feature without assessment. The assessment provides additional quality metrics but is not required for predictions.</em></p>
+<div style="border: 2px solid #ef4444; border-radius: 8px; padding: 16px; background-color: #fef2f2;">
+    <h3 style="color: #ef4444; margin-top: 0;">❌ Assessment Module Import Error</h3>
+    <p><strong>Failed to import the information content assessment module.</strong></p>
+    <p>This is likely due to missing dependencies (scipy, numpy, pandas) or a Python path issue.</p>
+    <p><em>Note: Prediction feature still works without assessment.</em></p>
 </div>
 """
         empty_df = pd.DataFrame()
